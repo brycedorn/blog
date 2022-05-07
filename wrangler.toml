@@ -1,4 +1,4 @@
-name= "hono-blog"
+name= "blog"
 type = "javascript"
 workers_dev = true
 
