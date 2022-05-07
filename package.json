@@ -1,0 +1,20 @@
+{
+  "name": "hono-blog",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "esbuild --bundle --sourcemap --minify --outdir=dist ./src/index.tsx",
+    "start": "miniflare --live-reload --debug",
+    "deploy": "wrangler publish"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "hono": "1.1.1",
+    "nano-jsx": "^0.0.30"
+  },
+  "devDependencies": {
+    "esbuild": "0.14.38",
+    "miniflare": "2.4.0",
+    "wrangler": "^0.0.30"
+  }
+}

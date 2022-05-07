@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "jsxFactory": "Nano.h",
+    "lib": [
+      "es2015",
+      "DOM"
+    ]
+  }
+}
