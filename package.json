@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
-    "build": "esbuild --bundle --sourcemap --minify --outdir=dist ./src/index.tsx",
+    "build": "npx esbuild --bundle --sourcemap --minify --outdir=dist ./src/index.tsx",
     "start": "miniflare --live-reload --debug",
     "deploy": "wrangler publish"
   },
@@ -14,7 +14,6 @@
   },
   "devDependencies": {
     "esbuild": "0.14.38",
-    "miniflare": "2.4.0",
-    "wrangler": "^0.0.30"
+    "miniflare": "2.4.0"
   }
 }
