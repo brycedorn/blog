@@ -18,6 +18,6 @@ const globalStyles = `
         padding: var(--gap);
     }
 }
-`;
+`
 
-export default withStyles(globalStyles);
+export default withStyles(globalStyles)

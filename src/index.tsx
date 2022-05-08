@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
-import Nano from 'nano-jsx'
 import { poweredBy } from 'hono/powered-by'
+import Nano from 'nano-jsx'
 import { getPosts, getPost } from './utils'
 import { render } from './renderer'
 import Home from './pages/Home'

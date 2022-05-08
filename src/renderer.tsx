@@ -1,7 +1,6 @@
-import Nano from 'nano-jsx'
-import { Helmet } from 'nano-jsx'
+import Nano, { Component, Helmet } from 'nano-jsx'
 
-export function render(component: any) {
+export function render(component: Component) {
   const app = Nano.renderSSR(component)
   const { body, head, footer, attributes } = Helmet.SSR(app)
   const html = `

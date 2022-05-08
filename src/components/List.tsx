@@ -1,6 +1,5 @@
-import Nano, { Fragment } from 'nano-jsx'
-import ListPost from './ListPost';
-import { withStyles } from 'nano-jsx/lib/withStyles'
+import Nano, { Fragment, withStyles } from 'nano-jsx'
+import ListPost from './ListPost'
 
 import type { PostType } from '../types'
 
@@ -17,19 +16,19 @@ export default function List({ posts }: { posts: PostType[] }) {
     ul {
       padding-left: var(--gap);
     }
-  `;
+  `
 
   return withStyles(css)(
-    <Fragment>
-        <h1>my posts on <a href="https://dev.to/bryce">dev.to</a></h1>
-        <ul>
-            {posts.map((post, i) => (
-              <Fragment>
-                {i > 0 && <hr />}
-                <ListPost post={post} />
-              </Fragment>
-            ))}
-        </ul>
-    </Fragment>
+    <>
+      <h1>my posts on <a href="https://dev.to/bryce">dev.to</a></h1>
+      <ul>
+        {posts.map((post, i) => (
+          <>
+            {i > 0 && <hr />}
+            <ListPost post={post} />
+          </>
+        ))}
+      </ul>
+    </>
   )
 }
