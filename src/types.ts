@@ -1,4 +1,4 @@
-export interface Post {
+export interface PostType {
     type_of: string
     id: number
     title: string
@@ -27,7 +27,7 @@ export interface Post {
     flare_tag: string
 }
 
-export interface PostDetail {
+export interface PostDetailType {
     type_of: string
     id: number
     title: string

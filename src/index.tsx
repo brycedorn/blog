@@ -4,7 +4,7 @@ import { poweredBy } from 'hono/powered-by'
 import { getPosts, getPost } from './utils'
 import { render } from './renderer'
 import Home from './pages/Home'
-import PostDetail from './pages/PostDetail'
+import Post from './pages/Post'
 
 export const app = new Hono()
 
@@ -19,7 +19,7 @@ app.get('/', async (c) => {
 app.get('/post/:id', async (c) => {
   const id = c.req.param('id')
   const post = await getPost(id)
-  const html = render(<PostDetail post={post} />)
+  const html = render(<Post post={post} />)
   return c.html(html)
 })
 

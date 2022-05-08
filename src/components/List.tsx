@@ -2,9 +2,9 @@ import Nano, { Fragment } from 'nano-jsx'
 import ListPost from './ListPost';
 import { withStyles } from 'nano-jsx/lib/withStyles'
 
-import type { Post } from '../types'
+import type { PostType } from '../types'
 
-export default function List({ posts }: { posts: Post[] }) {
+export default function List({ posts }: { posts: PostType[] }) {
   const css = `
     h1 {
       margin-bottom: calc(var(--gap) * 2);
@@ -12,6 +12,10 @@ export default function List({ posts }: { posts: Post[] }) {
 
     hr {
       margin-top: var(--gap);
+    }
+
+    ul {
+      padding-left: var(--gap);
     }
   `;
 

@@ -1,8 +1,8 @@
 import Nano from 'nano-jsx'
-import type { Post } from '../types'
+import type { PostType } from '../types'
 import { withStyles } from 'nano-jsx/lib/withStyles'
 
-export default function ListPost({ post }: { post: Post }) {
+export default function ListPost({ post }: { post: PostType }) {
     const date = new Date(post.published_at);
 
     const formattedDate = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear().toString().slice(2,4)}`
@@ -21,6 +21,10 @@ export default function ListPost({ post }: { post: Post }) {
         time {
             color: var(--text-bright);
         }
+
+        blockquote {
+            margin-right: calc(var(--gap) * 4);
+        }
         
         a {
             cursor: pointer;
@@ -33,7 +37,7 @@ export default function ListPost({ post }: { post: Post }) {
                 <h2>{post.title}</h2>
                 <time datetime={post.published_at}>{formattedDate}</time>
             </div>
-            <p>{post.description}</p>
+            <blockquote>{post.description}</blockquote>
             <a href={`/post/${post.id}`}>
                 <button>Read here</button>
             </a>
