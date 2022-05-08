@@ -1,4 +1,4 @@
-import type { Post, PostDetail } from './types'
+import type { PostType, PostDetailType } from './types'
 
 const API_URL = 'https://dev.to/api'
 
@@ -11,13 +11,14 @@ const opts = {
     headers
 }
 
-export async function getPosts(username: string): Promise<Post[]> {
+export async function getPosts(username: string): Promise<PostType[]> {
   const url = `${API_URL}/articles?username=${username}`
   const response = await fetch(url, opts)
+  console.log(response)
   return await response.json()
 }
 
-export async function getPost(id: string): Promise<PostDetail> {
+export async function getPost(id: string): Promise<PostDetailType> {
   const url = `${API_URL}/articles/${id}`
   const response = await fetch(url, opts)
   return await response.json()
