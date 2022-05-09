@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
-    "build": "./build.ts",
+    "build": "./build.js",
     "start": "miniflare --live-reload --debug --verbose",
     "deploy": "wrangler publish",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
@@ -19,7 +19,6 @@
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
     "esbuild": "^0.14.38",
-    "esbuild-envfile-plugin": "^1.0.2",
     "eslint": "^8.15.0",
     "miniflare": "2.4.0",
     "typescript": "^4.6.4"
