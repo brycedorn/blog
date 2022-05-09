@@ -5,7 +5,6 @@
   "scripts": {
     "build": "./build.js",
     "start": "miniflare --live-reload --debug --verbose",
-    "deploy": "wrangler publish",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "license": "MIT",

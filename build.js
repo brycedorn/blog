@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-/* eslint-disable @typescript-eslint/no-var-requires */
 
+/* eslint-disable-next-line @typescript-eslint/no-var-requires */
 const { build } = require('esbuild')
 
 const APP_BASE = 'src'

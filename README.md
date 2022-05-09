@@ -1,6 +1,6 @@
-# Hono minimal project
+## [blog.bryce.io](blog.bryce.io) [![Deploy](https://github.com/brycedorn/blog/actions/workflows/deploy.yml/badge.svg)](https://github.com/brycedorn/blog/actions/workflows/deploy.yml)
 
-This is a minimal project with [Hono](https://github.com/honojs/hono/) for Cloudflare Workers.
+This is a project built with [Hono](https://github.com/honojs/hono/) for Cloudflare Workers.
 
 ## Features
 
@@ -23,10 +23,4 @@ Develop
 
 ```sh
 npm start
-```
-
-Deploy
-
-```sh
-npm deploy
 ```
