@@ -15,8 +15,9 @@ jobs:
         with:
           node-version: 16
       - name: Install and build
-        run: npm i
-        run: npm run build
+        run: |
+          npm i
+          npm run build
         env:
           COOKIE: ${{ secrets.COOKIE }}
       - name: Publish
