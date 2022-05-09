@@ -6,7 +6,8 @@ module.exports = {
   rules: {
     indent: ["error", 2],
     semi: ["error", "never"],
-    "@typescript-eslint/no-unused-vars": "off"
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/ban-ts-comment": "warn"
   },
   parser: '@typescript-eslint/parser',
   plugins: [
