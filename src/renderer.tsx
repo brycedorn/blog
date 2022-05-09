@@ -9,7 +9,7 @@ export function render(component: Component) {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/water.css@2/out/water.min.css' />
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css' />
         ${head.join('\n')}
       </head>
       <body ${attributes.body.toString()}>

@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "esbuild --bundle --sourcemap --minify --outdir=dist ./src/index.tsx",
-    "start": "miniflare --live-reload --debug",
+    "start": "miniflare --live-reload --debug --verbose",
     "deploy": "wrangler publish",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
