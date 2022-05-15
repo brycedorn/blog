@@ -10,6 +10,24 @@ export default function Home({ post }: { post: PostDetailType }) {
     <>
       <Helmet>
         <title>dev blog | {post.title}</title>
+        <meta name="last-updated" content={post.edited_at} />
+        <link rel="canonical" href={`https://bryce.io/post/${post.id}`} />
+        <meta name="description" content={post.description} />
+        <meta name="keywords" content={post.tags.join(', ')} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={`https://bryce.io/post/${post.id}`} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.description} />
+        <meta property="og:site_name" content="blog.bryce.io" />
+        <meta name="twitter:creator" content="@amsterdorn" />
+        <meta name="twitter:title" content={post.title}/>
+        <meta name="twitter:description" content={post.description} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:widgets:new-embed-design" content="on" />
+        <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        <meta property="og:image" content={post.social_image} />
+        <meta name="twitter:image:src" content={post.social_image} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
       </Helmet>
       <main>
         <PostDetail post={post} />
