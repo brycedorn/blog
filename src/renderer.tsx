@@ -7,9 +7,10 @@ export function render(component: Component) {
     <!DOCTYPE html>
     <html ${attributes.html.toString()}>
       <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css' />
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css' />
+        <link rel='icon' type='image/png' href='https://github.com/brycedorn/brycedorn.github.io/blob/master/src/img/favicon.png'>
         ${head.join('\n')}
       </head>
       <body ${attributes.body.toString()}>

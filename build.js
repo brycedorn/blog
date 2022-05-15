@@ -19,8 +19,8 @@ build({
   outfile: `${OUTPUT_DIR}/${OUTPUT_FILE}`,
 })
   .then(() => { 
-    console.log("Build succeeded.") })
+    console.log('Build succeeded.') })
   .catch((e) => {
-    console.error("Error building:", e.message)
+    console.error('Error building:', e.message)
     process.exit(1)
   })

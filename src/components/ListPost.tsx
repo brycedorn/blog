@@ -3,8 +3,7 @@ import type { PostType } from '../types'
 
 export default function ListPost({ post }: { post: PostType }) {
   const date = new Date(post.published_at)
-
-  const formattedDate = `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear().toString().slice(2,4)}`
+  const formattedDate = new Intl.DateTimeFormat('en-US').format(date)
 
   const css = `
         div {
@@ -15,6 +14,10 @@ export default function ListPost({ post }: { post: PostType }) {
 
         li {
             list-style-type: none;
+        }
+
+        h2 {
+          margin-bottom: 0;
         }
         
         time {
@@ -33,16 +36,12 @@ export default function ListPost({ post }: { post: PostType }) {
   return withStyles(css)(
     <li>
       <div>
-        <h2>{post.title}</h2>
+        <h2>
+          <a href={`/post/${post.id}`}>{post.title}</a>
+        </h2>
         <time datetime={post.published_at}>{formattedDate}</time>
       </div>
       <blockquote>{post.description}</blockquote>
-      <a href={`/post/${post.id}`}>
-        <button>Read here</button>
-      </a>
-      <a href={post.url}>
-        <button>Read on dev.to</button>
-      </a>
     </li>
   )
 }
