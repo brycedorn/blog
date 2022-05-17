@@ -9,7 +9,7 @@ export default function Home({ posts }: { posts: PostType[] }) {
   return withGlobalStyles(
     <>
       <Helmet>
-        <title>dev blog</title>
+        <title>bryce.io | blog</title>
       </Helmet>
       <main>
         <List posts={posts} />

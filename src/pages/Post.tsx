@@ -9,7 +9,7 @@ export default function Home({ post }: { post: PostDetailType }) {
   return withGlobalStyles(
     <>
       <Helmet>
-        <title>dev blog | {post.title}</title>
+        <title>{post.title}</title>
         <meta name="last-updated" content={post.edited_at} />
         <link rel="canonical" href={`https://bryce.io/post/${post.id}`} />
         <meta name="description" content={post.description} />

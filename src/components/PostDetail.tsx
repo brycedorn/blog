@@ -1,5 +1,6 @@
 import Nano, { Fragment, withStyles } from 'nano-jsx'
 import type { PostDetailType } from '../types'
+import codeStyles from './codeStyles'
 
 export default function PostDetail({ post }: { post: PostDetailType }) {
   const date = new Date(post.published_at)
@@ -14,7 +15,7 @@ export default function PostDetail({ post }: { post: PostDetailType }) {
 
     img {
       margin-top: var(--gap);
-      border-radius: 6px;
+      border-radius: var(--border-radius);
     }
 
     .flex {
@@ -23,13 +24,22 @@ export default function PostDetail({ post }: { post: PostDetailType }) {
       width: 100%;
     }
 
+    button {
+      margin-bottom: 0;
+      border-radius: var(--border-radius);
+    }
+
     .top {
       margin-bottom: var(--gap);
+      align-items: start;
     }
 
     .bottom {
       margin-top: calc(var(--gap) * 4);
+      align-items: end;
     }
+
+    ${codeStyles}
   `
 
   const Navigation = ({ position }) => (
@@ -39,7 +49,7 @@ export default function PostDetail({ post }: { post: PostDetailType }) {
       </a>
       <div>
         <span>Read original post on </span>
-        <a href={post.url}>dev.to</a>.
+        <a href={post.url}>dev.to</a>
       </div>
     </div>
   )

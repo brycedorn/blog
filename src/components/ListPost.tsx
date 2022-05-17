@@ -6,32 +6,30 @@ export default function ListPost({ post }: { post: PostType }) {
   const formattedDate = new Intl.DateTimeFormat('en-US').format(date)
 
   const css = `
-        div {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-        }
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-        li {
-            list-style-type: none;
-        }
+    li {
+      margin: calc(var(--gap) * 1.5) 0;
+      list-style-type: none;
+    }
 
-        h2 {
-          margin-bottom: 0;
-        }
-        
-        time {
-            color: var(--text-bright);
-        }
+    h2 {
+      margin: 0;
+    }
+    
+    time {
+      color: var(--text-main);
+      border-radius: var(--border-radius);
+    }
 
-        blockquote {
-            margin-right: calc(var(--gap) * 4);
-        }
-        
-        a {
-            cursor: pointer;
-        }
-    `
+    p {
+      margin: var(--gap) calc(var(--gap) * 4) var(--gap) var(--gap);
+    }
+  `
 
   return withStyles(css)(
     <li>
@@ -41,7 +39,7 @@ export default function ListPost({ post }: { post: PostType }) {
         </h2>
         <time datetime={post.published_at}>{formattedDate}</time>
       </div>
-      <blockquote>{post.description}</blockquote>
+      <p><i>{post.description}</i></p>
     </li>
   )
 }

@@ -9,6 +9,27 @@ export default function List({ posts }: { posts: PostType[] }) {
       margin-bottom: calc(var(--gap) * 2);
     }
 
+    a {
+      border-bottom: 2px solid var(--focus);
+      box-shadow: inset 0 -8px 0 var(--focus);
+      border-radius: var(--border-radius);
+      color: inherit;
+      transition: box-shadow var(--animation-duration) ease, border-color var(--animation-duration) ease;
+    }
+
+    h1 a {
+      box-shadow: inset 0 -10px 0 var(--focus);
+    }
+
+    a:hover {
+      box-shadow: inset 0 -32px 0 var(--links);
+      border-color: var(--links);
+    }
+
+    h1 a:hover {
+      box-shadow: inset 0 -48px 0 var(--links);
+    }
+
     hr {
       margin-top: var(--gap);
     }
