@@ -8,13 +8,13 @@ import GithubCorner from '../components/GithubCorner'
 export default function Home({ posts }: { posts: PostType[] }) {
   return withGlobalStyles(
     <>
-      <Helmet>
-        <title>bryce.io | blog</title>
-      </Helmet>
       <main>
+        <Helmet>
+          <title>bryce.io | blog</title>
+        </Helmet>
         <List posts={posts} />
+        <Footer />
       </main>
-      <Footer />
       <GithubCorner />
     </>
   )

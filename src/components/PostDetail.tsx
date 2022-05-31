@@ -1,6 +1,7 @@
 import Nano, { Fragment, withStyles } from 'nano-jsx'
 import type { PostDetailType } from '../types'
-import codeStyles from './codeStyles'
+import codeStyles from '../styles/codeStyles'
+import embedStyles from '../styles/embedStyles'
 
 export default function PostDetail({ post }: { post: PostDetailType }) {
   const date = new Date(post.published_at)
@@ -16,6 +17,7 @@ export default function PostDetail({ post }: { post: PostDetailType }) {
     img {
       margin-top: var(--gap);
       border-radius: var(--border-radius);
+      box-shadow: 0 0 var(--gap) var(--background);;
     }
 
     .flex {

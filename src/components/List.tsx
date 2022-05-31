@@ -6,10 +6,10 @@ import type { PostType } from '../types'
 export default function List({ posts }: { posts: PostType[] }) {
   const css = `
     h1 {
-      margin-bottom: calc(var(--gap) * 2);
+      margin: var(--gap);
     }
 
-    a {
+    h1 a, ul a {
       border-bottom: 2px solid var(--focus);
       box-shadow: inset 0 -8px 0 var(--focus);
       border-radius: var(--border-radius);
@@ -21,8 +21,9 @@ export default function List({ posts }: { posts: PostType[] }) {
       box-shadow: inset 0 -10px 0 var(--focus);
     }
 
-    a:hover {
+    h1 a:hover, ul a:hover {
       box-shadow: inset 0 -32px 0 var(--links);
+      text-decoration: none;
       border-color: var(--links);
     }
 
