@@ -89,7 +89,7 @@ const globalStyles = `
 
   .ltag-github-readme-tag {
     position: relative;
-    border: 1px solid #dbdbdb;
+    border: 1px solid var(--text-main);
     border-radius: 3px;
     box-shadow: 1px 2px 4px 0 rgb(0 0 0 / 18%);
     margin: 1.1em auto 1.3em;
