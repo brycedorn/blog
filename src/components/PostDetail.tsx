@@ -42,6 +42,7 @@ export default function PostDetail({ post }: { post: PostDetailType }) {
     }
 
     ${codeStyles}
+    ${embedStyles}
   `
 
   const Navigation = ({ position }) => (
