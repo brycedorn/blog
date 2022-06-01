@@ -12,7 +12,7 @@ export default function List({ posts }: { posts: PostType[] }) {
     h1 a, ul a {
       border-bottom: 2px solid var(--focus);
       box-shadow: inset 0 -8px 0 var(--focus);
-      border-radius: var(--border-radius);
+      border-radius: var(--radius);
       color: inherit;
       transition: box-shadow var(--animation-duration) ease, border-color var(--animation-duration) ease;
     }
@@ -22,13 +22,13 @@ export default function List({ posts }: { posts: PostType[] }) {
     }
 
     h1 a:hover, ul a:hover {
-      box-shadow: inset 0 -32px 0 var(--links);
+      box-shadow: inset 0 -32px 0 var(--focus);
       text-decoration: none;
-      border-color: var(--links);
+      border-color: var(--focus);
     }
 
     h1 a:hover {
-      box-shadow: inset 0 -48px 0 var(--links);
+      box-shadow: inset 0 -48px 0 var(--focus);
     }
 
     hr {

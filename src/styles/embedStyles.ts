@@ -53,14 +53,14 @@ export default `
     }
 
     .ltag-github-readme-tag .readme-overview h2 img {
+        box-shadow: none;
         width: 1.15em;
         max-width: 1.1em;
         display: inline-block;
         left: 0px;
         margin: 0;
         vertical-align: -0.18em;
-        filter: invert(0);
-        filter: var(--theme-social-icon-invert, invert(0));
+        filter: var(--theme-social-icon-invert);
     }
 
     .ltag-github-readme-tag .readme-overview h3 {
@@ -90,7 +90,7 @@ export default `
         box-shadow: 0 0 60px 42px var(--background-body);
         position: relative;
         z-index: 1;
-        border-radius: var(--border-radius);
+        border-radius: var(--radius);
     }
 
     .gh-btn {

@@ -2,9 +2,7 @@ import { withStyles } from 'nano-jsx/lib/withStyles'
 import cssVars from './styles/cssVars'
 
 const globalStyles = `
-  :root {
-    ${cssVars}
-  }
+  ${cssVars}
 
   html {
     background: var(--background-body);

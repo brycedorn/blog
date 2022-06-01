@@ -16,7 +16,7 @@ export default function PostDetail({ post }: { post: PostDetailType }) {
 
     img {
       margin-top: var(--gap);
-      border-radius: var(--border-radius);
+      border-radius: var(--radius);
       box-shadow: 0 0 var(--gap) var(--background);;
     }
 
@@ -28,7 +28,7 @@ export default function PostDetail({ post }: { post: PostDetailType }) {
 
     button {
       margin-bottom: 0;
-      border-radius: var(--border-radius);
+      border-radius: var(--radius);
     }
 
     .top {
@@ -39,6 +39,11 @@ export default function PostDetail({ post }: { post: PostDetailType }) {
     .bottom {
       margin-top: calc(var(--gap) * 4);
       align-items: end;
+    }
+
+    code {
+      position: relative;
+      top: -1px;
     }
 
     ${codeStyles}

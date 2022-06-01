@@ -23,7 +23,7 @@ export default function ListPost({ post }: { post: PostType }) {
     
     time {
       color: var(--text-main);
-      border-radius: var(--border-radius);
+      border-radius: var(--radius);
     }
 
     p {
