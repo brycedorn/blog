@@ -10,18 +10,17 @@ export default `
 
         --background: #1a1a1a;
         --background-body: #222;
-        --text-main: #9c9c9c;
-        --text-bright: #f0f0f0;
+        --text-main: #b7bec5;
+        --text-bright: #eff1f3;
         --text-muted: #a9b1ba;
-        --links: #7a49a5;
-        --focus: #613a84;
+        --links: #80b7fc;
+        --focus: #0659c6;
         --border: #666;
 
-        --background-body-gradient: linear-gradient(to right, var(--background), var(--background-body), var(--background-body), var(--background-body), var(--background));
         --code: #ffbe85;
         --animation-duration: 0.1s;
-        --button-base: #171717;
-        --button-hover: #030303;
+        --button-base: #111;
+        --button-hover: #000;
         --selection: var(--button-base);
         --scrollbar-thumb: var(--button-hover);
         --form-placeholder: #a9a9a9;
@@ -44,16 +43,15 @@ export default `
 
     @media (prefers-color-scheme: light) {
         :root {
-            --links: #946db7;
-            --focus: #d0bfde;
-            --focus-light: #d0bfde;
-            --background: #f0f0f0;
-            --background-body: #fcfcfc;
-            --text-main: #444;
+            --links: #358dfa;
+            --focus: #b2d3fd;
+            --background: #eff1f3;
+            --background-body: #fefefe;
+            --text-main: #555;
             --text-bright: #333;
             --text-muted: #666;
-            --button-base: #dcdcdc;
-            --button-hover: #cecece;
+            --button-base: #d3d7dc;
+            --button-hover: #e1e4e7;
             --syntax-background-color: #444;
             --color-body-color: var(--background);
             --theme-social-icon-invert: unset;

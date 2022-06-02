@@ -35,7 +35,7 @@ export default function ListPost({ post }: { post: PostType }) {
     <li>
       <div>
         <h2>
-          <a href={`/post/${post.id}`}>{post.title}</a>
+          <a href={`/${post.slug}`}>{post.title}</a>
         </h2>
         <time datetime={post.published_at}>{formattedDate}</time>
       </div>

@@ -22,3 +22,41 @@ export async function getPost(id: string): Promise<PostDetailType> {
   const response = await fetch(url, opts)
   return await response.json()
 }
+
+export async function getCachedPosts(): Promise<PostType[]> {
+  const response = await POSTS.get('INDEX')
+  return JSON.parse(response)
+}
+
+export async function getCachedPost(slug: string): Promise<PostDetailType> {
+  const response = await POSTS.get(`${slug}`)
+  return JSON.parse(response)
+}
+
+function cleanSlug(slug: string): string {
+  const indexOfLastDash = slug.split('').reverse().indexOf('-') + 1
+  return slug.substr(0, slug.length - indexOfLastDash)
+}
+
+export async function updateEdgeCache(password: string, username: string) {
+  if (password === process.env.PASSWORD) {
+    const posts = await getPosts(username)
+
+    const updatePosts = posts.map(async (post, i) => {
+      return await setTimeout(async () => {
+        const slug = cleanSlug(post.slug)
+        const postDetail = await getPost(post.id)
+        return await POSTS.put(`${slug}`, JSON.stringify(postDetail))
+      }, 500 * i)
+    })
+
+    await Promise.all(updatePosts)
+
+    const modPosts = posts.map(post => ({ ...post, slug: cleanSlug(post.slug) }))
+    await POSTS.put('INDEX', JSON.stringify(modPosts))
+
+    return new Response(`Updating ${posts.length} posts...`)
+  } else {
+    return new Response('Wrong password.')
+  }
+}

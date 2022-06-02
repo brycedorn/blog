@@ -8,7 +8,8 @@ module.exports = {
     quotes: ['error', 'single'],
     semi: ['error', 'never'],
     '@typescript-eslint/no-unused-vars': 'off',
-    '@typescript-eslint/ban-ts-comment': 'warn'
+    '@typescript-eslint/ban-ts-comment': 'warn',
+    'no-trailing-spaces': 'error'
   },
   parser: '@typescript-eslint/parser',
   plugins: [

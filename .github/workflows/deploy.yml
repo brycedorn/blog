@@ -20,6 +20,9 @@ jobs:
         uses: cloudflare/wrangler-action@1.3.0
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
-          secrets: COOKIE
+          secrets: |
+            COOKIE
+            PASSWORD
         env:
           COOKIE: ${{ secrets.COOKIE }}
+          PASSWORD: ${{ secrets.PASSWORD }}

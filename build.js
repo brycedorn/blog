@@ -12,13 +12,14 @@ build({
   entryPoints: [`${APP_BASE}/${ENTRY_FILE}`],
   define: {
     'process.env.COOKIE': JSON.stringify(process.env.COOKIE),
+    'process.env.PASSWORD': JSON.stringify(process.env.PASSWORD),
   },
   bundle: true,
   sourcemap: true,
   minify: true,
   outfile: `${OUTPUT_DIR}/${OUTPUT_FILE}`,
 })
-  .then(() => { 
+  .then(() => {
     console.log('Build succeeded.') })
   .catch((e) => {
     console.error('Error building:', e.message)

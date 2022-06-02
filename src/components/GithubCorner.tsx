@@ -3,7 +3,7 @@ import Nano, { withStyles } from 'nano-jsx'
 export default function GithubCorner() {
   const css = `
     .github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
-    svg{fill:var(--text-main);color:var(--background-body);position:absolute;top:0;border:0;right:0;}
+    svg{fill:var(--links);color:var(--background-body);position:absolute;top:0;border:0;right:0;}
     path {transform-origin:130px 106px;}
   `
 

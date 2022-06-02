@@ -6,7 +6,6 @@ const globalStyles = `
 
   html {
     background: var(--background-body);
-    background: var(--background-body-gradient);
   }
 
   body {
@@ -20,7 +19,7 @@ const globalStyles = `
     flex-direction: column;
     max-width: calc(var(--main-width) + var(--gap) * 2);
     margin: auto;
-    padding: var(--gap);
+    padding: calc(var(--gap) / 4);
   }
 
   footer {

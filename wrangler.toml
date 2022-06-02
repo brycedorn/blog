@@ -4,6 +4,10 @@ workers_dev = true
 
 compatibility_date = "2022-05-07"
 
+kv_namespaces = [
+	{ binding = "POSTS", id = "d03c966b70f94d8688e55bdf12deb445" }
+]
+
 [build]
 command = "npm run build"
 
