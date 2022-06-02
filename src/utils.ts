@@ -42,21 +42,18 @@ export async function updateEdgeCache(password: string, username: string) {
   if (password === process.env.PASSWORD) {
     const posts = await getPosts(username)
 
-    const updatePosts = posts.map(async (post, i) => {
-      return await setTimeout(async () => {
+    await Promise.all(posts.map(async (post, i) => {
+      setTimeout(async () => {
         const slug = cleanSlug(post.slug)
-        console.log('updating', slug)
         const postDetail = await getPost(post.id)
-        console.log('postDetail', postDetail)
+        console.log('updating', post.id);
         return await POSTS.put(`${slug}`, JSON.stringify(postDetail))
       }, 500 * i)
-    })
-
-    await Promise.all(updatePosts)
+    }))
 
     const modPosts = posts.map(post => ({ ...post, slug: cleanSlug(post.slug) }))
-    console.log('modPosts', modPosts);
     await POSTS.put('INDEX', JSON.stringify(modPosts))
+    console.log('updated index for', modPosts.length, 'posts');
 
     return new Response(`Updating ${posts.length} posts...`)
   } else {
