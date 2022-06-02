@@ -41,22 +41,22 @@ export function cleanSlug(slug: string): string {
 export async function updateEdgeCache(password: string, username: string) {
   if (password === process.env.PASSWORD) {
     const posts = await getPosts(username)
-
-    await Promise.all(posts.map(async (post, i) => {
-      setTimeout(async () => {
-        const slug = cleanSlug(post.slug)
-        const postDetail = await getPost(post.id)
-        console.log('updating', post.id)
-        return await POSTS.put(`${slug}`, JSON.stringify(postDetail))
-      }, 500 * i)
-    }))
-
     const modPosts = posts.map(post => ({ ...post, slug: cleanSlug(post.slug) }))
     await POSTS.put('INDEX', JSON.stringify(modPosts))
-    console.log('updated index for', modPosts.length, 'posts')
-
     return new Response(`Updating ${posts.length} posts...`)
   } else {
     return new Response('Wrong password.')
   }
+}
+
+export async function updateEdgeCacheForPost(id: number) {
+  const post = await getPost(id)
+  const slug = cleanSlug(post.slug)
+  await POSTS.put(`${slug}`, JSON.stringify(post))
+
+  const posts = await getCachedPosts()
+  const cachedPostIndex = posts.map(p => p.id).indexOf(id)
+  posts[cachedPostIndex].cachedSlug = slug
+  await POSTS.put('INDEX', JSON.stringify(posts))
+  return slug
 }
