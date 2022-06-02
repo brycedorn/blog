@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { poweredBy } from 'hono/powered-by'
 import Nano from 'nano-jsx'
-import { getCachedPosts, getCachedPost, updateEdgeCache, getPost } from './utils'
+import { getCachedPosts, getCachedPost, updateEdgeCache, getPost, cleanSlug } from './utils'
 import { render } from './renderer'
 import Home from './pages/Home'
 import Post from './pages/Post'
@@ -20,13 +20,17 @@ app.get('/', async (c) => {
 app.get('/post/:id', async (c) => {
   const id = c.req.param('id')
   const post = await getPost(id)
-  const html = render(<Post post={post} />)
-  return c.html(html)
+  console.log('updating', post.id)
+  const slug = cleanSlug(post.slug)
+  await POSTS.put(`${slug}`, JSON.stringify(post))
+  return c.redirect(`/${slug}`, 301)
+  // const html = render(<Post post={post} />)
+  // return c.html(html)
 })
 
 // app.get('/post/:id', async (c) => {
 //   const { slug } = await getPost(id)
-//   c.redirect(`/${slug}`, 301)
+//   return c.redirect(`/${slug}`, 301)
 // })
 
 app.get('/update', async (c) => {
@@ -34,6 +38,8 @@ app.get('/update', async (c) => {
   const response = await updateEdgeCache(password, 'bryce')
   return response
 })
+
+app.get('/favicon.ico', (c) => new Response())
 
 app.get('/:slug', async (c) => {
   const slug = c.req.param('slug')

@@ -33,7 +33,7 @@ export async function getCachedPost(slug: string): Promise<PostDetailType> {
   return JSON.parse(response)
 }
 
-function cleanSlug(slug: string): string {
+export function cleanSlug(slug: string): string {
   const indexOfLastDash = slug.split('').reverse().indexOf('-') + 1
   return slug.substr(0, slug.length - indexOfLastDash)
 }
@@ -46,14 +46,14 @@ export async function updateEdgeCache(password: string, username: string) {
       setTimeout(async () => {
         const slug = cleanSlug(post.slug)
         const postDetail = await getPost(post.id)
-        console.log('updating', post.id);
+        console.log('updating', post.id)
         return await POSTS.put(`${slug}`, JSON.stringify(postDetail))
       }, 500 * i)
     }))
 
     const modPosts = posts.map(post => ({ ...post, slug: cleanSlug(post.slug) }))
     await POSTS.put('INDEX', JSON.stringify(modPosts))
-    console.log('updated index for', modPosts.length, 'posts');
+    console.log('updated index for', modPosts.length, 'posts')
 
     return new Response(`Updating ${posts.length} posts...`)
   } else {
