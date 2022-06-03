@@ -1,4 +1,5 @@
 import Nano, { withStyles } from 'nano-jsx'
+import { withMinifiedStyles } from '../utils'
 import type { PostType } from '../types'
 
 export default function ListPost({ post }: { post: PostType }) {
@@ -31,7 +32,7 @@ export default function ListPost({ post }: { post: PostType }) {
     }
   `
 
-  return withStyles(css)(
+  return withMinifiedStyles(css)(
     <li>
       <div>
         <h2>

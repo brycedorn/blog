@@ -1,3 +1,5 @@
+import { withStyles } from 'nano-jsx'
+import { minify } from 'csso'
 import type { PostType, PostDetailType } from './types'
 
 const API_URL = 'https://dev.to/api'
@@ -65,4 +67,8 @@ export async function updateEdgeCacheForPost(id: number) {
   posts[cachedPostIndex].cachedSlug = slug
   await POSTS.put('INDEX', JSON.stringify(posts))
   return slug
+}
+
+export function withMinifiedStyles(css) {
+  return withStyles(minify(css).css)
 }

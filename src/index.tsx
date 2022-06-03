@@ -12,7 +12,7 @@ app.use('*', poweredBy())
 
 app.get('/', async (c) => {
   const posts = await getCachedPosts()
-  const html = render(<Home posts={posts} />)
+  const html = await render(<Home posts={posts} />)
   return c.html(html)
 })
 
@@ -33,7 +33,7 @@ app.get('/favicon.ico', (c) => new Response())
 app.get('/:slug', async (c) => {
   const slug = c.req.param('slug')
   const post = await getCachedPost(slug)
-  const html = render(<Post post={post} />)
+  const html = await render(<Post post={post} />)
   return c.html(html)
 })
 

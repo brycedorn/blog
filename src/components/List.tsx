@@ -1,4 +1,5 @@
-import Nano, { Fragment, withStyles } from 'nano-jsx'
+import Nano, { Fragment } from 'nano-jsx'
+import { withMinifiedStyles } from '../utils'
 import ListPost from './ListPost'
 
 import type { PostType } from '../types'
@@ -40,7 +41,7 @@ export default function List({ posts }: { posts: PostType[] }) {
     }
   `
 
-  return withStyles(css)(
+  return withMinifiedStyles(css)(
     <>
       <h1>my posts on <a href="https://dev.to/bryce">dev.to</a></h1>
       <ul>

@@ -1,5 +1,5 @@
-import { withStyles } from 'nano-jsx/lib/withStyles'
-import cssVars from './styles/cssVars'
+import { withMinifiedStyles } from '../utils'
+import cssVars from './cssVars'
 
 const globalStyles = `
   ${cssVars}
@@ -28,4 +28,4 @@ const globalStyles = `
 }
 `
 
-export default withStyles(globalStyles)
+export default withMinifiedStyles(globalStyles)

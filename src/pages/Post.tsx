@@ -2,7 +2,7 @@ import Nano, { Fragment, Helmet } from 'nano-jsx'
 import type { PostDetailType } from '../types'
 import Footer from '../components/Footer'
 import PostDetail from '../components/PostDetail'
-import withGlobalStyles from '../globalStyles'
+import withGlobalStyles from '../styles/globalStyles'
 import GithubCorner from '../components/GithubCorner'
 
 export default function Home({ post }: { post: PostDetailType }) {

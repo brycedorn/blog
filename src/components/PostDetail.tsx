@@ -1,4 +1,5 @@
-import Nano, { Fragment, withStyles } from 'nano-jsx'
+import Nano, { Fragment } from 'nano-jsx'
+import { withMinifiedStyles } from '../utils'
 import type { PostDetailType } from '../types'
 import codeStyles from '../styles/codeStyles'
 import embedStyles from '../styles/embedStyles'
@@ -65,7 +66,7 @@ export default function PostDetail({ post }: { post: PostDetailType }) {
     </div>
   )
 
-  return withStyles(css)(
+  return withMinifiedStyles(css)(
     <>
       <Navigation position="top" />
       {post.cover_image && <img id="cover" src={post.cover_image} alt={`Cover image for ${post.title}`} />}
