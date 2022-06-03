@@ -11,11 +11,11 @@ export default function Home({ post }: { post: PostDetailType }) {
       <Helmet>
         <title>{post.title}</title>
         <meta name="last-updated" content={post.edited_at} />
-        <link rel="canonical" href={`https://bryce.io/post/${post.id}`} />
+        <link rel="canonical" href={`https://bryce.io/${post.slug}`} />
         <meta name="description" content={post.description} />
         <meta name="keywords" content={post.tags.join(', ')} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://bryce.io/post/${post.id}`} />
+        <meta property="og:url" content={`https://bryce.io/${post.slug}`} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.description} />
         <meta property="og:site_name" content="blog.bryce.io" />

@@ -41,9 +41,16 @@ export function cleanSlug(slug: string): string {
 export async function updateEdgeCache(password: string, username: string) {
   if (password === process.env.PASSWORD) {
     const posts = await getPosts(username)
-    const modPosts = posts.map(post => ({ ...post, slug: cleanSlug(post.slug) }))
-    await POSTS.put('INDEX', JSON.stringify(modPosts))
-    return new Response(`Updating ${posts.length} posts...`)
+    const cachedPosts = await getCachedPosts()
+    const isCached = postId => cachedPosts?.find(cachedPost => (
+      cachedPost.id === postId && cachedPost.cachedSlug
+    ))
+    const newCachedPosts = posts.map(post => ({
+      ...post, cachedSlug: isCached(post.id) ? cleanSlug(post.slug) : null
+    }))
+    const numCached = newCachedPosts.filter(({ cachedSlug }) => cachedSlug).length
+    await POSTS.put('INDEX', JSON.stringify(newCachedPosts))
+    return new Response(`Indexed ${posts.length} posts, ${numCached} were already cached.`)
   } else {
     return new Response('Wrong password.')
   }
@@ -52,8 +59,7 @@ export async function updateEdgeCache(password: string, username: string) {
 export async function updateEdgeCacheForPost(id: number) {
   const post = await getPost(id)
   const slug = cleanSlug(post.slug)
-  await POSTS.put(`${slug}`, JSON.stringify(post))
-
+  await POSTS.put(`${slug}`, JSON.stringify({ ...post, slug }))
   const posts = await getCachedPosts()
   const cachedPostIndex = posts.map(p => p.id).indexOf(id)
   posts[cachedPostIndex].cachedSlug = slug
