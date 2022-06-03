@@ -17,7 +17,10 @@ export default function PostDetail({ post }: { post: PostDetailType }) {
     img {
       margin-top: var(--gap);
       border-radius: var(--radius);
-      box-shadow: 0 0 var(--gap) var(--background);;
+    }
+
+    #cover {
+      box-shadow: 0 0 var(--gap) var(--background);
     }
 
     .flex {
@@ -65,7 +68,7 @@ export default function PostDetail({ post }: { post: PostDetailType }) {
   return withStyles(css)(
     <>
       <Navigation position="top" />
-      {post.cover_image && <img src={post.cover_image} alt={`Cover image for ${post.title}`} />}
+      {post.cover_image && <img id="cover" src={post.cover_image} alt={`Cover image for ${post.title}`} />}
       <h1>{post.title}</h1>
       <h3>Posted on {formattedDate}</h3>
       <div innerHTML={{ __dangerousHtml: post.body_html }} />
