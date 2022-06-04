@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { poweredBy } from 'hono/powered-by'
 import Nano from 'nano-jsx'
-import { getCachedPosts, getCachedPost, updateEdgeCache, updateEdgeCacheForPost } from './utils'
+import { getCachedPosts, getCachedPost, cacheIndex, cachePost, refreshPost } from './utils'
 import { render } from './renderer'
 import Home from './pages/Home'
 import Post from './pages/Post'
@@ -18,14 +18,19 @@ app.get('/', async (c) => {
 
 app.get('/post/:id', async (c) => {
   const id = Number(c.req.param('id'))
-  const slug = await updateEdgeCacheForPost(id)
+  const slug = await cachePost(id)
   return c.redirect(`/${slug}`, 301)
+})
+
+app.get('/update/:id', async (c) => {
+  const id = Number(c.req.param('id'))
+  const password = c.req.query('password')
+  return await refreshPost(password, id)
 })
 
 app.get('/update', async (c) => {
   const password = c.req.query('password')
-  const response = await updateEdgeCache(password, 'bryce')
-  return response
+  return await cacheIndex(password, 'bryce')
 })
 
 app.get('/favicon.ico', (c) => new Response())

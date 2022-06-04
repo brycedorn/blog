@@ -40,7 +40,7 @@ export function cleanSlug(slug: string): string {
   return slug.substr(0, slug.length - indexOfLastDash)
 }
 
-export async function updateEdgeCache(password: string, username: string) {
+export async function cacheIndex(password: string, username: string) {
   if (password === process.env.PASSWORD) {
     const posts = await getPosts(username)
     const cachedPosts = await getCachedPosts()
@@ -58,7 +58,7 @@ export async function updateEdgeCache(password: string, username: string) {
   }
 }
 
-export async function updateEdgeCacheForPost(id: number) {
+export async function cachePost(id: number) {
   const post = await getPost(id)
   const slug = cleanSlug(post.slug)
   await POSTS.put(`${slug}`, JSON.stringify({ ...post, slug }))
@@ -67,6 +67,15 @@ export async function updateEdgeCacheForPost(id: number) {
   posts[cachedPostIndex].cachedSlug = slug
   await POSTS.put('INDEX', JSON.stringify(posts))
   return slug
+}
+
+export async function refreshPost(password: string, id: string) {
+  if (password === process.env.PASSWORD) {
+    const slug = await cachePost(id)
+    return new Response(`Updated ${slug}`)
+  } else {
+    return new Response('Wrong password.')
+  }
 }
 
 export function withMinifiedStyles(css) {
