@@ -47,6 +47,7 @@ export function cleanSlug(slug: string): string {
 }
 
 async function promiseAllSequential(promises: Array<Promise>):Promise<Array> {
+  if (promises.length === 0) return []
   const [firstElement, ...rest] = promises
   return [await firstElement, ...(await promiseAllSequential(rest))]
 }
