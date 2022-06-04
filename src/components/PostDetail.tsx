@@ -3,6 +3,7 @@ import { withMinifiedStyles } from '../utils'
 import type { PostDetailType } from '../types'
 import codeStyles from '../styles/codeStyles'
 import embedStyles from '../styles/embedStyles'
+import PostNavigation from './PostNavigation'
 
 export default function PostDetail({ post }: { post: PostDetailType }) {
   const date = new Date(post.published_at)
@@ -15,34 +16,19 @@ export default function PostDetail({ post }: { post: PostDetailType }) {
       font-size: 3em;
     }
 
-    img {
-      margin-top: var(--gap);
-      border-radius: var(--radius);
+    h3 {
+      color: var(--text-muted);
+      margin: 0 0 calc(var(--gap)/2) 0;
     }
 
-    #cover {
-      box-shadow: 0 0 var(--gap) var(--background);
-    }
-
-    .flex {
-      display: flex;
-      justify-content: space-between;
+    hr {
       width: 100%;
     }
 
-    button {
-      margin-bottom: 0;
+    #cover {
+      margin-top: calc(var(--gap)*2);
       border-radius: var(--radius);
-    }
-
-    .top {
-      margin-bottom: var(--gap);
-      align-items: start;
-    }
-
-    .bottom {
-      margin-top: calc(var(--gap) * 4);
-      align-items: end;
+      box-shadow: 0 0 calc(var(--gap)/2) var(--button-base);
     }
 
     code {
@@ -54,26 +40,15 @@ export default function PostDetail({ post }: { post: PostDetailType }) {
     ${embedStyles}
   `
 
-  const Navigation = ({ position }) => (
-    <div class={`flex ${position}`}>
-      <a href="/">
-        <button>Back</button>
-      </a>
-      <div>
-        <span>Read original post on </span>
-        <a href={post.url}>dev.to</a>
-      </div>
-    </div>
-  )
-
   return withMinifiedStyles(css)(
     <>
-      <Navigation position="top" />
+      <PostNavigation />
       {post.cover_image && <img id="cover" src={post.cover_image} alt={`Cover image for ${post.title}`} />}
       <h1>{post.title}</h1>
-      <h3>Posted on {formattedDate}</h3>
-      <div innerHTML={{ __dangerousHtml: post.body_html }} />
-      <Navigation position="bottom" />
+      <h3>Posted to <a href={post.url} target="_blank">dev.to</a> on {formattedDate}</h3>
+      <hr />
+      <div id="content" innerHTML={{ __dangerousHtml: post.body_html }} />
+      <PostNavigation />
     </>
   )
 }

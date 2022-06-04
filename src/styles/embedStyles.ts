@@ -1,4 +1,15 @@
 export default `
+    .article-body-image-wrapper {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    .article-body-image-wrapper img {
+        border-radius: var(--radius);
+        box-shadow: 0 0 calc(var(--gap)/2) var(--button-base);
+      }
+
     .ltag__link {
         margin: 0.95em auto;
         border: 1px solid var(--text-muted);
