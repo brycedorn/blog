@@ -35,38 +35,43 @@ export async function getCachedPost(slug: string): Promise<PostDetailType> {
   return JSON.parse(response)
 }
 
+export async function getCachedSlugById(id: number) {
+  const post = await getPost(id)
+  const slug = cleanSlug(post.slug)
+  return slug
+}
+
 export function cleanSlug(slug: string): string {
   const indexOfLastDash = slug.split('').reverse().indexOf('-') + 1
   return slug.substr(0, slug.length - indexOfLastDash)
 }
 
+async function promiseAllSequential(promises: Array<Promise>):Promise<Array> {
+  const [firstElement, ...rest] = promises
+  return [await firstElement, ...(await promiseAllSequential(rest))]
+}
+
+const sleep = amount => new Promise(resolve => setTimeout(resolve, amount))
+
 export async function updateEdgeCache(password: string, username: string) {
   if (password === process.env.PASSWORD) {
     const posts = await getPosts(username)
-    const cachedPosts = await getCachedPosts()
-    const isCached = postId => cachedPosts?.find(cachedPost => (
-      cachedPost.id === postId && cachedPost.cachedSlug
-    ))
-    const newCachedPosts = posts.map(post => ({
-      ...post, cachedSlug: isCached(post.id) ? cleanSlug(post.slug) : null
+    const newPosts = posts.map(post => ({
+      ...post, cachedSlug: cleanSlug(post.slug)
     }))
-    const numCached = newCachedPosts.filter(({ cachedSlug }) => cachedSlug).length
-    await POSTS.put('INDEX', JSON.stringify(newCachedPosts))
-    return new Response(`Indexed ${posts.length} posts, ${numCached} were already cached.`)
+    await POSTS.put('INDEX', JSON.stringify(newPosts))
+    const promises = posts.map(async (post, i) => {
+      await sleep(i * 1000)
+      const postDetail = await getPost(post.id)
+      const slug = cleanSlug(post.slug)
+      console.log('Updated cache for', slug)
+      await POSTS.put(slug, JSON.stringify({ ...postDetail, slug }))
+    })
+    promiseAllSequential(promises)
+    return new Response(`Indexed ${posts.length} posts.`)
   } else {
     return new Response('Wrong password.')
   }
-}
-
-export async function updateEdgeCacheForPost(id: number) {
-  const post = await getPost(id)
-  const slug = cleanSlug(post.slug)
-  await POSTS.put(`${slug}`, JSON.stringify({ ...post, slug }))
-  const posts = await getCachedPosts()
-  const cachedPostIndex = posts.map(p => p.id).indexOf(id)
-  posts[cachedPostIndex].cachedSlug = slug
-  await POSTS.put('INDEX', JSON.stringify(posts))
-  return slug
 }
 
 export function withMinifiedStyles(css) {
