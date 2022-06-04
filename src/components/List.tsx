@@ -45,7 +45,7 @@ export default function List({ posts }: { posts: PostType[] }) {
     <>
       <h1>my posts on <a href="https://dev.to/bryce">dev.to</a></h1>
       <ul>
-        {posts?.map((post, i) => (
+        {posts.map((post, i) => (
           <>
             {i > 0 && <hr />}
             <ListPost post={post} />

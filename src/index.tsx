@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { poweredBy } from 'hono/powered-by'
 import Nano from 'nano-jsx'
-import { getCachedPosts, getCachedPost, updateEdgeCache, getCachedSlugById } from './utils'
+import { getCachedPosts, getCachedPost, updateEdgeCache, updateEdgeCacheForPost } from './utils'
 import { render } from './renderer'
 import Home from './pages/Home'
 import Post from './pages/Post'
@@ -18,7 +18,7 @@ app.get('/', async (c) => {
 
 app.get('/post/:id', async (c) => {
   const id = Number(c.req.param('id'))
-  const slug = await getCachedSlugById(id)
+  const slug = await updateEdgeCacheForPost(id)
   return c.redirect(`/${slug}`, 301)
 })
 
