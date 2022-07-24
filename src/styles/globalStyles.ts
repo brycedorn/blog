@@ -24,6 +24,7 @@ const globalStyles = `
 
   footer {
     padding-top: var(--gap);
+    font-size: 0.8em;
   }
 }
 `

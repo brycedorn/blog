@@ -8,8 +8,8 @@ export default `
         --footer-height: 60px;
         --radius: 2px;
 
-        --background: #1a1a1a;
-        --background-body: #222;
+        --background: #000;
+        --background-body: #111;
         --text-main: #b7bec5;
         --text-bright: #eff1f3;
         --text-muted: #a9b1ba;
@@ -27,7 +27,7 @@ export default `
         --form-text: var(--text-bright);
         --color-body-color: var(--background);
 
-        --syntax-background-color: var(--button-base);
+        --syntax-background-color: #222;
         --variable: #d941e2;
         --highlight: #efdb43;
         --syntax-text-color: #f8f8f2;

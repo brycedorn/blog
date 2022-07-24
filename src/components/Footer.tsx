@@ -5,7 +5,7 @@ export default function Footer() {
     <footer>
       <center>
         <address>
-          Built with <a href='https://github.com/honojs/hono'>Hono</a> & <a href= 'https://workers.cloudflare.com/'>Cloudflare Workers</a> | View <a href='https://github.com/brycedorn/blog'>source</a> on GitHub
+          Built with <a href='https://github.com/honojs/hono'>Hono</a> & <a href= 'https://workers.cloudflare.com/'>Cloudflare Workers</a> • View <a href='https://github.com/brycedorn/blog'>source</a> on GitHub
         </address>
       </center>
     </footer>

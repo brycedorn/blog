@@ -1,4 +1,8 @@
 export default `
+    #content p {
+        line-height: 1.6;
+    }
+
     .article-body-image-wrapper {
         width: 100%;
         display: block;
