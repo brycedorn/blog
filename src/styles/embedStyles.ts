@@ -215,4 +215,24 @@ export default `
         min-height: 20px;
         margin: 0px;
     }
+
+    #instagram-liquid-tag {
+        background: white;
+        border: 1px solid var(--border);
+        margin: 1px 1px 12px;
+        min-width: 326px;
+        max-width: 540px;
+        width: calc(100% - 2px);
+        height: 559px;
+        border-radius: 3px;
+        box-shadow: none;
+        display: block;
+        padding: 0px;
+    }
+
+    .instagram-position {
+        position: relative;
+        max-width: 540px;
+        margin: 0 auto;
+    }
 `
