@@ -1,4 +1,4 @@
-## [blog.bryce.io](blog.bryce.io)
+## [blog.bryce.io](https://blog.bryce.io)
 
 [![Deploy](https://github.com/brycedorn/blog/actions/workflows/deploy.yml/badge.svg)](https://github.com/brycedorn/blog/actions/workflows/deploy.yml)
 
