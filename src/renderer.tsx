@@ -7,8 +7,7 @@ export async function render(component: Component) {
   const { body, head, footer, attributes } = Helmet.SSR(app)
   const favicon = await POSTS.get('favicon')
 
-  const html = `
-<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html ${attributes.html.toString()}>
   <head>
     <meta charset='UTF-8'>
@@ -29,18 +28,18 @@ export async function render(component: Component) {
 
 export async function renderFeed(posts: PostType[]) {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>bryce.io | blog RSS</title>
     <link>https://blog.bryce.io</link>
     <description>Idk</description>${posts.map(post => `
     <item>
       <title>${removeEmoji(post.title)}</title>
-      <link>${post.url}</link>
+      <link>https://blog.bryce.io/${post.cachedSlug}</link>
       <description>${removeEmoji(post.description)}</description>
-      <author>Bryce Dorn</author>
+      <author>hi@bryce.io</author>
       <guid>${post.slug}</guid>
-      <pubDate>${post.published_at}</pubDate>
+      <pubDate>${(new Date(post.published_at)).toUTCString()}</pubDate>
     </item>`).join('')}
   </channel>
 </rss>
