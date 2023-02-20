@@ -28,8 +28,7 @@ export async function render(component: Component) {
 }
 
 export async function renderFeed(posts: PostType[]) {
-  const xml = `
-<?xml version="1.0" encoding="UTF-8"?>
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
     <title>bryce.io | blog RSS</title>
