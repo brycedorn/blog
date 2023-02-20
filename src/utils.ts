@@ -19,7 +19,7 @@ export async function getPosts(username: string): Promise<PostType[]> {
   return await response.json()
 }
 
-export async function getPost(id: string): Promise<PostDetailType> {
+export async function getPost(id: number): Promise<PostDetailType> {
   const url = `${API_URL}/articles/${id}`
   const response = await fetch(url, opts)
   return await response.json()
@@ -69,7 +69,7 @@ export async function cachePost(id: number) {
   return slug
 }
 
-export async function refreshPost(password: string, id: string) {
+export async function refreshPost(password: string, id: number) {
   if (password === process.env.PASSWORD) {
     const slug = await cachePost(id)
     return new Response(`Updated ${slug}`)
@@ -80,4 +80,8 @@ export async function refreshPost(password: string, id: string) {
 
 export function withMinifiedStyles(css) {
   return withStyles(minify(css).css)
+}
+
+export function removeEmoji(string) {
+  return string.replace(/[^\p{L}\p{N}\p{P}\p{Z}^$\n]/gu, '')
 }

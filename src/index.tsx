@@ -2,7 +2,7 @@ import { Hono } from 'hono'
 import { poweredBy } from 'hono/powered-by'
 import Nano from 'nano-jsx'
 import { getCachedPosts, getCachedPost, cacheIndex, cachePost, refreshPost } from './utils'
-import { render } from './renderer'
+import { render, renderFeed } from './renderer'
 import Home from './pages/Home'
 import Post from './pages/Post'
 
@@ -40,6 +40,12 @@ app.get('/:slug', async (c) => {
   const post = await getCachedPost(slug)
   const html = await render(<Post post={post} />)
   return c.html(html)
+})
+
+app.get('/rss', async (c) => {
+  const posts = await getCachedPosts()
+  const rss = await renderFeed(posts)
+  return c.body(rss, 200, { 'content-type': 'application/rss+xml' })
 })
 
 app.fire()

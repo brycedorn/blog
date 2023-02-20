@@ -1,3 +1,7 @@
+declare global {
+  const POSTS: any
+}
+
 export interface PostType {
   type_of: string
   id: number
@@ -25,6 +29,7 @@ export interface PostType {
   tags: string
   user: string
   flare_tag: string
+  cachedSlug?: string
 }
 
 export interface PostDetailType {
