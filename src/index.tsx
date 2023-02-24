@@ -1,12 +1,14 @@
 import { Hono } from 'hono'
 import { poweredBy } from 'hono/powered-by'
 import Nano from 'nano-jsx'
-import { getCachedPosts, getCachedPost, cacheIndex, cachePost, refreshPost } from './utils'
+import { getCachedPosts, getCachedPost, cacheIndex, cachePost, refreshPost, cleanSlug } from './utils'
 import { render, renderFeed } from './renderer'
 import Home from './pages/Home'
 import Post from './pages/Post'
 
 export const app = new Hono()
+
+const USERNAME = 'bryce'
 
 app.use('*', poweredBy())
 
@@ -30,7 +32,7 @@ app.get('/update/:id', async (c) => {
 
 app.get('/update', async (c) => {
   const password = c.req.query('password')
-  return await cacheIndex(password, 'bryce')
+  return await cacheIndex(password, USERNAME)
 })
 
 app.get('/favicon.ico', (c) => new Response())
@@ -40,6 +42,11 @@ app.get('/:slug', async (c) => {
   const post = await getCachedPost(slug)
   const html = await render(<Post post={post} />)
   return c.html(html)
+})
+
+app.get(`/${USERNAME}/:slug`, async (c) => {
+  const slug = cleanSlug(c.req.param('slug'))
+  return c.redirect(slug, 301)
 })
 
 app.get('/rss', async (c) => {
