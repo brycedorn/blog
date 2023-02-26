@@ -15,8 +15,8 @@ app.use('*', poweredBy())
 
 app.get('/', async (c) => {
   const posts = await getCachedPosts()
-  const page = posts.slice(0, PAGE_SIZE)
-  const defaultPageInfo = { pageNumber: 0, isFirstPage: true, isLastPage: posts.length <= PAGE_SIZE }
+  const page = posts?.slice(0, PAGE_SIZE)
+  const defaultPageInfo = { pageNumber: 0, isFirstPage: true, isLastPage: posts?.length <= PAGE_SIZE }
   const html = await render(<Home posts={page} pageInfo={defaultPageInfo} />)
   return c.html(html)
 })
@@ -26,9 +26,9 @@ app.get('/page/:pageNumber', async (c) => {
   const posts = await getCachedPosts()
   const pageStart = pageNumber * PAGE_SIZE
   const pageEnd = pageStart + PAGE_SIZE
-  const page = posts.slice(pageStart, pageEnd)
+  const page = posts?.slice(pageStart, pageEnd)
   const isFirstPage = pageNumber === 0
-  const isLastPage = pageEnd >= posts.length
+  const isLastPage = pageEnd >= posts?.length
   const html = await render(<Home posts={page} pageInfo={{ pageNumber, isFirstPage, isLastPage}} />)
   return c.html(html)
 })
@@ -50,7 +50,7 @@ app.get('/back/:slug', async (c) => {
   const posts = await getCachedPosts()
   const postIndex = posts.findIndex(({ cachedSlug }: { cachedSlug?: string }) => cachedSlug === slug)
   const pageNumber = Math.floor(postIndex / PAGE_SIZE)
-  return c.redirect(`/page/${pageNumber}`, 301)
+  return c.redirect(`/page/${pageNumber}`)
 })
 
 app.get('/update', async (c) => {
