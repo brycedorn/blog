@@ -73,3 +73,9 @@ export interface PostDetailType {
   user: string
   flare_tag: string
 }
+
+export interface PageInfoType {
+  pageNumber: number
+  isFirstPage: boolean
+  isLastPage: boolean
+}

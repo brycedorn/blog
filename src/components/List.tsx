@@ -5,6 +5,9 @@ import ListPost from './ListPost'
 import type { PostType } from '../types'
 
 export default function List({ posts }: { posts: PostType[] }) {
+  const blogUrl = 'https://dev.to/bryce'
+  const avatarUrl = posts && posts[0].user.profile_image_90
+
   const css = `
     h1 {
       margin: var(--gap) 0;
@@ -61,8 +64,8 @@ export default function List({ posts }: { posts: PostType[] }) {
   return withMinifiedStyles(css)(
     <>
       <div id="title">
-        <a id="me" href="https://dev.to/bryce"><img src={posts[0].user.profile_image_90}/></a>
-        <h1>my posts on <a href="https://dev.to/bryce">dev.to</a></h1>
+        {avatarUrl && <a id="me" href={blogUrl}><img src={avatarUrl}/></a>}
+        <h1>my posts on <a href={blogUrl}>dev.to</a></h1>
       </div>
       <ul>
         {posts?.map((post, i) => (

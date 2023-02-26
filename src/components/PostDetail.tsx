@@ -17,7 +17,7 @@ export default function PostDetail({ post }: { post: PostDetailType }) {
     }
 
     a {
-      color: white;
+      color: var(--text-bright);
     }
 
     a:hover {

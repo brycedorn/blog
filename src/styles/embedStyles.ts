@@ -3,6 +3,10 @@ export default `
         line-height: 1.6;
     }
 
+    #content a {
+        text-decoration: underline;
+    }
+
     .article-body-image-wrapper {
         width: 100%;
         display: block;
