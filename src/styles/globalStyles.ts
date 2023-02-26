@@ -13,6 +13,7 @@ const globalStyles = `
   }
 
   main {
+    font-family: 'Golos Text', sans-serif;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -25,6 +26,10 @@ const globalStyles = `
   footer {
     padding-top: var(--gap);
     font-size: 0.8em;
+  }
+
+  ::selection {
+    background: var(--links);
   }
 }
 `

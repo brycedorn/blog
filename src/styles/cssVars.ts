@@ -16,6 +16,7 @@ export default `
         --links: #80b7fc;
         --focus: #0659c6;
         --border: #666;
+        --border-dark: #444;
 
         --code: #ffbe85;
         --animation-duration: 0.1s;
@@ -53,6 +54,7 @@ export default `
             --button-base: #d3d7dc;
             --button-hover: #e1e4e7;
             --syntax-background-color: #444;
+            --border-dark: #ddd;
             --color-body-color: var(--background);
             --theme-social-icon-invert: unset;
         }

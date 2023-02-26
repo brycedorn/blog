@@ -15,6 +15,9 @@ export async function render(component: Component) {
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css' />
     <link rel='icon' type='image/png' href=${favicon || ''}>
     <link rel="alternate" type="application/rss+xml" title="RSS Feed for blog.bryce.io" href="https://blog.bryce.io/rss" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&display=swap" rel="stylesheet">
     ${head.join('\n')}
   </head>
   <body ${attributes.body.toString()}>

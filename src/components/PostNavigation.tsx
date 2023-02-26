@@ -32,6 +32,6 @@ export default function PostNavigation() {
   `
 
   return withMinifiedStyles(css)(
-    <h1 class="nav"><a href="/">⏎</a></h1>
+    <h1 class="nav">go <a href="/">back</a></h1>
   )
 }

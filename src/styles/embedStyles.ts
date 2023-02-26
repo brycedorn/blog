@@ -20,17 +20,26 @@ export default `
         display: flex;
         width: calc(100% - 5vw - 70px);
         padding: calc(var(--gap) / 2);
+        border-radius: var(--radius);
+    }
+
+    .ltag__link__content {
+        margin-left: calc(var(--gap) / 2);
+    }
+
+    .ltag__link__link:hover {
+        text-decoration: none;
     }
 
     .ltag__link .ltag__link__content h2 {
-        margin-top: 0;
+        margin: 0 0 0.2em 0;
     }
 
     .ltag__link .ltag__link__content h3 {
-        margin: 0.1vw 0;
+        margin: 0.1em 0;
         padding: 0;
-        margin-bottom: 0;
         color: var(--text-muted);
+        font-size: 1em;
     }
 
     .ltag__link .ltag__link__pic img {
