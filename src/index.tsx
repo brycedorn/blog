@@ -48,7 +48,7 @@ app.get('/back/:slug', async (c) => {
   const posts = await getCachedPosts()
   const postIndex = posts.findIndex(({ cachedSlug }: { cachedSlug?: string }) => cachedSlug === slug)
   const pageNumber = Math.floor(postIndex / PAGE_SIZE)
-  return c.redirect(`/page/${pageNumber}`)
+  return c.redirect(`/page/${pageNumber}`, 301)
 })
 
 app.get('/update', async (c) => {

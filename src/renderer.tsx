@@ -18,7 +18,7 @@ export async function render(component: Component) {
     <link rel="alternate" type="application/rss+xml" title="RSS Feed for ${BLOG_TITLE}" href="${BLOG_URL}/rss" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&family=Source+Code+Pro&display=swap" rel="stylesheet">
     ${head.join('\n')}
   </head>
   <body ${attributes.body.toString()}>
