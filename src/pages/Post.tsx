@@ -6,7 +6,7 @@ import withGlobalStyles from '../styles/globalStyles'
 import GithubCorner from '../components/GithubCorner'
 import { BLOG_TITLE, BLOG_URL } from '../consts'
 
-export default function Home({ post }: { post: PostDetailType }) {
+export default function Home({ post, slug }: { post: PostDetailType, slug: string }) {
   return withGlobalStyles(
     <>
       <Helmet>
@@ -31,7 +31,7 @@ export default function Home({ post }: { post: PostDetailType }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
       </Helmet>
       <main>
-        <PostDetail post={post} />
+        <PostDetail post={post} slug={slug} />
       </main>
       <Footer />
       <GithubCorner />

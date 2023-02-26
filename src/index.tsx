@@ -61,7 +61,7 @@ app.get('/favicon.ico', (c) => new Response())
 app.get('/:slug', async (c) => {
   const slug = c.req.param('slug')
   const post = await getCachedPost(slug)
-  const html = await render(<Post post={post} />)
+  const html = await render(<Post post={post} slug={slug} />)
   return c.html(html)
 })
 
