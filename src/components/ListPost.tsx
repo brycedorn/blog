@@ -6,7 +6,7 @@ import { BLOG_URL } from '../consts'
 export default function ListPost({ post }: { post: PostType }) {
   const date = new Date(post.published_at)
   const formattedDate = new Intl.DateTimeFormat('en-US').format(date)
-  const postUrl = `${BLOG_URL}${post.cachedSlug || `/post/${post.id}`}`
+  const postUrl = `${BLOG_URL}/${post.cachedSlug || `post/${post.id}`}`
 
   const css = `
     li {
