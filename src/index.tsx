@@ -5,11 +5,9 @@ import { getCachedPosts, getCachedPost, cacheIndex, cachePost, refreshPost, clea
 import { render, renderFeed } from './renderer'
 import Home from './pages/Home'
 import Post from './pages/Post'
+import { USERNAME, PAGE_SIZE } from './consts'
 
 export const app = new Hono()
-
-const USERNAME = 'bryce'
-const PAGE_SIZE = 4
 
 app.use('*', poweredBy())
 

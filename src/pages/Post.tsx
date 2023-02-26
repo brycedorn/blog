@@ -4,6 +4,7 @@ import Footer from '../components/Footer'
 import PostDetail from '../components/PostDetail'
 import withGlobalStyles from '../styles/globalStyles'
 import GithubCorner from '../components/GithubCorner'
+import { BLOG_TITLE, BLOG_URL } from '../consts'
 
 export default function Home({ post }: { post: PostDetailType }) {
   return withGlobalStyles(
@@ -11,14 +12,14 @@ export default function Home({ post }: { post: PostDetailType }) {
       <Helmet>
         <title>{post.title}</title>
         <meta name="last-updated" content={post.edited_at} />
-        <link rel="canonical" href={`https://bryce.io/${post.slug}`} />
+        <link rel="canonical" href={`${BLOG_URL}/${post.slug}`} />
         <meta name="description" content={post.description} />
         <meta name="keywords" content={post.tags.join(', ')} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://bryce.io/${post.slug}`} />
+        <meta property="og:url" content={`${BLOG_URL}/${post.slug}`} />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.description} />
-        <meta property="og:site_name" content="blog.bryce.io" />
+        <meta property="og:site_name" content={BLOG_TITLE} />
         <meta name="twitter:creator" content="@amsterdorn" />
         <meta name="twitter:title" content={post.title}/>
         <meta name="twitter:description" content={post.description} />

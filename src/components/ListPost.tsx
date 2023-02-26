@@ -1,11 +1,12 @@
-import Nano, { withStyles } from 'nano-jsx'
+import Nano from 'nano-jsx'
 import { withMinifiedStyles } from '../utils'
 import type { PostType } from '../types'
+import { BLOG_URL } from '../consts'
 
 export default function ListPost({ post }: { post: PostType }) {
   const date = new Date(post.published_at)
   const formattedDate = new Intl.DateTimeFormat('en-US').format(date)
-  const postUrl = post.cachedSlug || `/post/${post.id}`
+  const postUrl = `${BLOG_URL}${post.cachedSlug || `/post/${post.id}`}`
 
   const css = `
     li {

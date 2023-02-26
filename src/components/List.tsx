@@ -3,9 +3,9 @@ import { withMinifiedStyles } from '../utils'
 import ListPost from './ListPost'
 
 import type { PostType } from '../types'
+import { DEV_TO_URL } from '../consts'
 
 export default function List({ posts }: { posts: PostType[] }) {
-  const blogUrl = 'https://dev.to/bryce'
   const avatarUrl = posts && posts[0].user.profile_image_90
 
   const css = `
@@ -64,8 +64,8 @@ export default function List({ posts }: { posts: PostType[] }) {
   return withMinifiedStyles(css)(
     <>
       <div id="title">
-        {avatarUrl && <a id="me" href={blogUrl}><img src={avatarUrl}/></a>}
-        <h1>my posts on <a href={blogUrl}>dev.to</a></h1>
+        {avatarUrl && <a id="me" href="/"><img src={avatarUrl}/></a>}
+        <h1>my posts on <a href={DEV_TO_URL}>dev.to</a></h1>
       </div>
       <ul>
         {posts?.map((post, i) => (
