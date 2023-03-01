@@ -39,16 +39,16 @@ export default function ListPost({ post }: { post: PostType }) {
       object-fit: cover;
     }
 
-    #right {
+    .right {
       width: 100%;
       align-items: start;
     }
 
-    #left {
+    .left {
       align-items: center;
     }
 
-    #left, #right {
+    .left, .right {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -58,18 +58,18 @@ export default function ListPost({ post }: { post: PostType }) {
       color: var(--text-main);
     }
 
-    p a:hover, #left:hover {
+    p a:hover, .left:hover {
       text-decoration: none;
     }
   `
 
   return withMinifiedStyles(css)(
     <li>
-      <a id="left" href={postUrl}>
+      <a class="left" href={postUrl}>
         {post.cover_image && <img src={post.cover_image} />}
         <time datetime={post.published_at}>{formattedDate}</time>
       </a>
-      <div id="right">
+      <div class="right">
         <h2>
           <a href={postUrl}>{post.title}</a>
         </h2>

@@ -39,9 +39,8 @@ export default function PostDetail({ post, slug }: { post: PostDetailType, slug:
       box-shadow: 0 0 calc(var(--gap)/2) var(--button-base);
     }
 
-    code {
-      position: relative;
-      top: -1px;
+    #content {
+      margin-bottom: 2em;
     }
 
     ${codeStyles}

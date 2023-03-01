@@ -3,7 +3,7 @@ export default `
         line-height: 1.6;
     }
 
-    #content a {
+    #content p a {
         text-decoration: underline;
     }
 
@@ -19,7 +19,7 @@ export default `
       }
 
     .ltag__link {
-        margin: 0.95em auto;
+        margin: 1.6em auto;
         border: 1px solid var(--text-muted);
         display: flex;
         width: calc(100% - 5vw - 70px);
