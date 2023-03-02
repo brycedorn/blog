@@ -56,7 +56,7 @@ app.get('/update', async (c) => {
   return await cacheIndex(password, USERNAME)
 })
 
-app.get('/favicon.ico', (c) => new Response())
+app.get('/favicon.ico', () => new Response())
 
 app.get('/:slug', async (c) => {
   const slug = c.req.param('slug')

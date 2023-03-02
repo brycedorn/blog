@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "strict": true,
+    "skipLibCheck": true,
     "jsx": "react",
     "jsxFactory": "Nano.h",
     "jsxFragmentFactory": "Fragment",

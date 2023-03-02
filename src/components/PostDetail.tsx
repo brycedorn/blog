@@ -1,5 +1,5 @@
 import Nano, { Fragment } from 'nano-jsx'
-import { cleanSlug, withMinifiedStyles } from '../utils'
+import { withMinifiedStyles } from '../utils'
 import type { PostDetailType } from '../types'
 import codeStyles from '../styles/codeStyles'
 import embedStyles from '../styles/embedStyles'

@@ -9,7 +9,7 @@ export const API_URL = 'https://dev.to/api'
 
 export const headers = {
   'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36',
-  cookie: process.env.COOKIE
+  cookie: process.env.COOKIE || ''
 }
 
 export const fetchOpts = {
