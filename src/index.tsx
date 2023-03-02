@@ -2,7 +2,7 @@ import { Hono } from 'hono'
 import { poweredBy } from 'hono/powered-by'
 import Nano from 'nano-jsx'
 import { getCachedPosts, getCachedPost, cacheIndex, cachePost, refreshPost, cleanSlug } from './utils'
-import { render, renderFeed } from './renderer'
+import { render, renderFeed, renderRobotsTxt, renderSitemap } from './renderer'
 import Home from './pages/Home'
 import Post from './pages/Post'
 import { USERNAME, PAGE_SIZE } from './consts'
@@ -72,8 +72,19 @@ app.get(`/${USERNAME}/:slug`, async (c) => {
 
 app.get('/rss', async (c) => {
   const posts = await getCachedPosts()
-  const rss = await renderFeed(posts)
-  return c.body(rss, 200, { 'content-type': 'application/rss+xml' })
+  const xml = await renderFeed(posts)
+  return c.body(xml, 200, { 'content-type': 'application/rss+xml' })
+})
+
+app.get('/sitemap.xml', async (c) => {
+  const posts = await getCachedPosts()
+  const xml = await renderSitemap(posts)
+  return c.body(xml, 200, { 'content-type': 'application/xml' })
+})
+
+app.get('/robots.txt', (c) => {
+  const txt = renderRobotsTxt()
+  return c.body(txt, 200, { 'content-type': 'application/text' })
 })
 
 app.fire()

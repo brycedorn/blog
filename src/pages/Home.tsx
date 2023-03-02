@@ -6,7 +6,7 @@ import withGlobalStyles from '../styles/globalStyles'
 import ListPagination from '../components/ListPagination'
 import GithubCorner from '../components/GithubCorner'
 
-export default function Home({ posts, pageInfo }: { posts: PostType[], pageInfo?: PageInfoType }) {
+export default function Home({ posts, pageInfo }: { posts: PostType[], pageInfo: PageInfoType }) {
   return withGlobalStyles(
     <>
       <main>

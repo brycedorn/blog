@@ -2,7 +2,7 @@ import Nano from 'nano-jsx'
 import { withMinifiedStyles } from '../utils'
 import { PageInfoType } from '../types'
 
-export default function ListPagination({ pageInfo }: { pageInfo?: PageInfoType }) {
+export default function ListPagination({ pageInfo }: { pageInfo: PageInfoType }) {
   const {pageNumber, isFirstPage, isLastPage} = pageInfo
 
   const css = `

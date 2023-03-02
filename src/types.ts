@@ -1,5 +1,10 @@
 declare global {
-  const POSTS: any
+  const POSTS: KVStorageType
+}
+
+interface KVStorageType {
+  get: (key: string) => Promise<string>,
+  put: (key: string, value: string) => Promise<void>
 }
 
 interface UserType {

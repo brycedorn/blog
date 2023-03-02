@@ -1,7 +1,7 @@
 import Nano, { Component, Helmet } from 'nano-jsx'
 import { PostType } from './types'
 import { removeEmoji } from './utils'
-import { BLOG_TITLE, BLOG_URL } from './consts'
+import { BLOG_TITLE, BLOG_URL, PAGE_SIZE } from './consts'
 
 export async function render(component: Component) {
   const app = Nano.renderSSR(component)
@@ -49,4 +49,42 @@ export async function renderFeed(posts: PostType[]) {
   `
 
   return xml
+}
+
+export async function renderSitemap(posts: PostType[]) {
+  const lastmod = (new Date()).toISOString()
+  const pages = new Array(posts.length/PAGE_SIZE).fill(null)
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>${BLOG_URL}</loc>
+  <lastmod>${lastmod}</lastmod>
+  <priority>1.00</priority>
+</url>
+${posts.map((post, i) => `<url>
+  <loc>${BLOG_URL}/${post.cachedSlug}</loc>
+  <lastmod>${lastmod}</lastmod>
+  <priority>${Number(0.99 - i/posts.length).toFixed(2)}</priority>
+</url>
+`).join('')}
+${pages.map((_page, i) => `<url>
+  <loc>${BLOG_URL}/page/${i}</loc>
+  <lastmod>${lastmod}</lastmod>
+  <priority>${Number(0.99 - i/pages.length).toFixed(2)}</priority>
+</url>
+`).join('')}
+</urlset>
+  `
+
+  return xml
+}
+
+export function renderRobotsTxt() {
+  return `
+User-agent: *
+Sitemap: ${BLOG_URL}/sitemap.xml
+  `
 }

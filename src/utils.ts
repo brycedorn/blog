@@ -1,27 +1,17 @@
 import { withStyles } from 'nano-jsx'
 import { minify } from 'csso'
 import type { PostType, PostDetailType } from './types'
-
-const API_URL = 'https://dev.to/api'
-
-const headers = {
-  'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36',
-  cookie: process.env.COOKIE
-}
-
-const opts = {
-  headers
-}
+import { API_URL, fetchOpts } from './consts'
 
 export async function getPosts(username: string): Promise<PostType[]> {
   const url = `${API_URL}/articles?username=${username}`
-  const response = await fetch(url, opts)
+  const response = await fetch(url, fetchOpts)
   return await response.json()
 }
 
 export async function getPost(id: number): Promise<PostDetailType> {
   const url = `${API_URL}/articles/${id}`
-  const response = await fetch(url, opts)
+  const response = await fetch(url, fetchOpts)
   return await response.json()
 }
 
@@ -37,14 +27,14 @@ export async function getCachedPost(slug: string): Promise<PostDetailType> {
 
 export function cleanSlug(slug: string): string {
   const indexOfLastDash = slug.split('').reverse().indexOf('-') + 1
-  return slug.substr(0, slug.length - indexOfLastDash)
+  return slug.substring(0, slug.length - indexOfLastDash)
 }
 
 export async function cacheIndex(password: string, username: string) {
   if (password === process.env.PASSWORD) {
     const posts = await getPosts(username)
     const cachedPosts = await getCachedPosts()
-    const isCached = postId => cachedPosts?.find(cachedPost => (
+    const isCached = (postId: number) => cachedPosts?.find(cachedPost => (
       cachedPost.id === postId && cachedPost.cachedSlug
     ))
     const newCachedPosts = posts.map(post => ({
@@ -78,10 +68,10 @@ export async function refreshPost(password: string, id: number) {
   }
 }
 
-export function withMinifiedStyles(css) {
+export function withMinifiedStyles(css: string) {
   return withStyles(minify(css).css)
 }
 
-export function removeEmoji(string) {
-  return string.replace(/[^\p{L}\p{N}\p{P}\p{Z}^$\n]/gu, '')
+export function removeEmoji(s: string) {
+  return s.replace(/[^\p{L}\p{N}\p{P}\p{Z}^$\n]/gu, '')
 }
