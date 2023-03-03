@@ -4,7 +4,7 @@ import { withMinifiedStyles } from '../utils'
 export default function PostNavigation({ slug }: {slug:string}) {
   const css = `
     h1.nav {
-      margin: var(--gap) 0;
+      margin: 0 0 var(--gap) 0;
       font-size: 2.2em;
     }
 

@@ -61,7 +61,7 @@ app.get('/favicon.ico', () => new Response())
 app.get('/:slug', async (c) => {
   const slug = c.req.param('slug')
   const post = await getCachedPost(slug)
-  const html = await render(<Post post={post} slug={slug} />)
+  const html = await render(<Post post={post} slug={slug} />, post)
   return c.html(html)
 })
 
@@ -78,13 +78,14 @@ app.get('/rss', async (c) => {
 
 app.get('/sitemap.xml', async (c) => {
   const posts = await getCachedPosts()
+  console.log(posts)
   const xml = await renderSitemap(posts)
   return c.body(xml, 200, { 'content-type': 'application/xml' })
 })
 
 app.get('/robots.txt', (c) => {
   const txt = renderRobotsTxt()
-  return c.body(txt, 200, { 'content-type': 'application/text' })
+  return c.text(txt)
 })
 
 app.fire()

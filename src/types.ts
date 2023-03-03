@@ -75,7 +75,7 @@ export interface PostDetailType {
   tags: string[]
   body_html: string
   body_markdown: string
-  user: string
+  user: UserType
   flare_tag: string
 }
 

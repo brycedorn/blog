@@ -40,7 +40,7 @@ export default function PostDetail({ post, slug }: { post: PostDetailType, slug:
     }
 
     #content {
-      margin-bottom: 2em;
+      margin-bottom: calc(var(--gap) * 4);
     }
 
     ${codeStyles}

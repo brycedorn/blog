@@ -1,9 +1,9 @@
 import Nano, { Component, Helmet } from 'nano-jsx'
-import { PostType } from './types'
+import { PostDetailType, PostType } from './types'
 import { removeEmoji } from './utils'
 import { BLOG_TITLE, BLOG_URL, PAGE_SIZE } from './consts'
 
-export async function render(component: Component) {
+export async function render(component: Component, post?: PostDetailType) {
   const app = Nano.renderSSR(component)
   const { body, head, footer, attributes } = Helmet.SSR(app)
   const favicon = await POSTS.get('favicon')
@@ -19,6 +19,7 @@ export async function render(component: Component) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    ${renderStructuredData(post)}
     ${head.join('\n')}
   </head>
   <body ${attributes.body.toString()}>
@@ -36,7 +37,7 @@ export async function renderFeed(posts: PostType[]) {
   <channel>
     <title>bryce.io | blog RSS</title>
     <link>${BLOG_URL}</link>
-    <description>Idk</description>${posts.map(post => `
+    <description>Idk</description>${posts?.map(post => `
     <item>
       <title>${removeEmoji(post.title)}</title>
       <link>${BLOG_URL}/${post.cachedSlug}</link>
@@ -53,7 +54,7 @@ export async function renderFeed(posts: PostType[]) {
 
 export async function renderSitemap(posts: PostType[]) {
   const lastmod = (new Date()).toISOString()
-  const pages = new Array(posts.length/PAGE_SIZE).fill(null)
+  const pages = new Array(Math.floor(posts.length/PAGE_SIZE)).fill(null)
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -64,7 +65,7 @@ export async function renderSitemap(posts: PostType[]) {
   <lastmod>${lastmod}</lastmod>
   <priority>1.00</priority>
 </url>
-${posts.map((post, i) => `<url>
+${posts?.map((post, i) => `<url>
   <loc>${BLOG_URL}/${post.cachedSlug}</loc>
   <lastmod>${lastmod}</lastmod>
   <priority>${Number(0.99 - i/posts.length).toFixed(2)}</priority>
@@ -83,8 +84,28 @@ ${pages.map((_page, i) => `<url>
 }
 
 export function renderRobotsTxt() {
-  return `
-User-agent: *
-Sitemap: ${BLOG_URL}/sitemap.xml
-  `
+  return `User-agent: *\nSitemap: ${BLOG_URL}/sitemap.xml`
+}
+
+function renderStructuredData(post?: PostDetailType) {
+  if (!post) {
+    return ''
+  }
+
+  const json = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    image: [post.cover_image],
+    datePublished: post.published_at,
+    dateModified: post.edited_at || post.created_at,
+    author: [{
+      '@type': 'Person',
+      name: 'Bryce Dorn',
+      url: post.user.website_url,
+      image: post.user.profile_image
+    }]
+  }
+
+  return `<script type="application/ld+json">${JSON.stringify(json)}</script>`
 }
