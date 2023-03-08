@@ -72,7 +72,7 @@ ${posts?.map((post, i) => `<url>
 </url>
 `).join('')}
 ${pages.map((_page, i) => `<url>
-  <loc>${BLOG_URL}/page/${i}</loc>
+  <loc>${BLOG_URL}/page/${i + 1}</loc>
   <lastmod>${lastmod}</lastmod>
   <priority>${Number(0.99 - i/pages.length).toFixed(2)}</priority>
 </url>
