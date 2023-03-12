@@ -4,7 +4,7 @@ import type { PostType, PostDetailType } from './types'
 import { API_URL, fetchOpts } from './consts'
 
 export async function getPosts(username: string): Promise<PostType[]> {
-  const url = `${API_URL}/articles?username=${username}`
+  const url = `${API_URL}/articles?username=${username}&per_page=1000`
   const response = await fetch(url, fetchOpts)
   return await response.json()
 }
