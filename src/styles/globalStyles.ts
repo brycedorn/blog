@@ -1,7 +1,9 @@
 import { withMinifiedStyles } from '../utils'
 import cssVars from './cssVars'
+import water from './water'
 
 const globalStyles = `
+  ${water}
   ${cssVars}
 
   html {
@@ -13,7 +15,7 @@ const globalStyles = `
   }
 
   main {
-    font-family: 'Golos Text', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     position: relative;
     display: flex;
     justify-content: space-between;

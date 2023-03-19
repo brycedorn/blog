@@ -1,7 +1,6 @@
 export default `
     code {
         overflow: auto;
-        font-family: 'Source Code Pro'
     }
 
     pre>code::-webkit-scrollbar {
