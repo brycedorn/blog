@@ -7,6 +7,7 @@ export default `
         --header-height: 60px;
         --footer-height: 60px;
         --radius: 2px;
+        --list-image-size: 80px;
 
         --background: #000;
         --background-body: #111;

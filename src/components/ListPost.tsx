@@ -32,10 +32,15 @@ export default function ListPost({ post }: { post: PostType }) {
       margin: var(--gap) 0 0 var(--gap);
     }
 
-    img {
-      width: 80px;
-      height: 80px;
-      border-radius: var(--radius);
+    .post-image {
+      width: var(--list-image-size);
+      height: var(--list-image-size);
+      border-radius: calc(var(--radius) * 2);
+      border: #fff solid 2px;
+    }
+
+    .post-image img {
+      height: var(--list-image-size);
       object-fit: cover;
     }
 
@@ -66,7 +71,7 @@ export default function ListPost({ post }: { post: PostType }) {
   return withMinifiedStyles(css)(
     <li>
       <a class="left" href={postUrl}>
-        {post.cover_image && <img src={post.cover_image} />}
+        {post.cover_image && <div class="post-image"><img src={post.cover_image} /></div>}
         <time datetime={post.published_at}>{formattedDate}</time>
       </a>
       <div class="right">

@@ -48,9 +48,9 @@ export default function List({ posts }: { posts: PostType[] }) {
     }
 
     #me img {
-      border-radius: 25%;
-      max-width: 40px;
-      max-height: 40px;
+      border-radius: calc(var(--radius) * 2);
+      max-width: calc(var(--list-image-size) / 2);
+      max-height: calc(var(--list-image-size) / 2);
       border: var(--text-bright) solid 2px;
       margin-right: 0.8em;
     }
