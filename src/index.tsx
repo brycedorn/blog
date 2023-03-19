@@ -43,14 +43,6 @@ app.get('/update/:id', async (c) => {
   return await refreshPost(password, id)
 })
 
-app.get('/back/:slug', async (c) => {
-  const slug = c.req.param('slug')
-  const posts = await getCachedPosts()
-  const postIndex = posts.findIndex(({ cachedSlug }: { cachedSlug?: string }) => cachedSlug === slug)
-  const pageNumber = Math.floor(postIndex / PAGE_SIZE)
-  return c.redirect(`/page/${pageNumber}`, 301)
-})
-
 app.get('/update', async (c) => {
   const password = c.req.query('password')
   return await cacheIndex(password, USERNAME)
@@ -61,7 +53,10 @@ app.get('/favicon.ico', () => new Response())
 app.get('/:slug', async (c) => {
   const slug = c.req.param('slug')
   const post = await getCachedPost(slug)
-  const html = await render(<Post post={post} slug={slug} />, post)
+  const posts = await getCachedPosts()
+  const postIndex = posts.findIndex(({ cachedSlug }: { cachedSlug?: string }) => cachedSlug === slug)
+  const pageNumber = Math.floor(postIndex / PAGE_SIZE)
+  const html = await render(<Post post={post} slug={slug} pageNumber={pageNumber} />, post)
   return c.html(html)
 })
 

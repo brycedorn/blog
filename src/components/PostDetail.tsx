@@ -5,7 +5,7 @@ import codeStyles from '../styles/codeStyles'
 import embedStyles from '../styles/embedStyles'
 import PostNavigation from './PostNavigation'
 
-export default function PostDetail({ post, slug }: { post: PostDetailType, slug: string }) {
+export default function PostDetail({ post, slug, pageNumber }: { post: PostDetailType, slug: string, pageNumber: number }) {
   const date = new Date(post.published_at)
   const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric', year: 'numeric' }
   const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date)
@@ -49,12 +49,12 @@ export default function PostDetail({ post, slug }: { post: PostDetailType, slug:
 
   return withMinifiedStyles(css)(
     <>
-      <PostNavigation slug={slug} />
+      <PostNavigation pageNumber={pageNumber} />
       {post.cover_image && <a href={post.url} id="cover"><img src={post.cover_image} alt={`Cover image for ${post.title}`} /></a>}
       <h1><a href={post.url}>{post.title}</a></h1>
       <h3>{formattedDate}</h3>
       <div id="content" innerHTML={{ __dangerousHtml: post.body_html }} />
-      <PostNavigation slug={slug} />
+      <PostNavigation pageNumber={pageNumber} />
     </>
   )
 }

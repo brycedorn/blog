@@ -1,7 +1,7 @@
 import Nano from 'nano-jsx'
 import { withMinifiedStyles } from '../utils'
 
-export default function PostNavigation({ slug }: {slug:string}) {
+export default function PostNavigation({ pageNumber }: {pageNumber:number}) {
   const css = `
     h1.nav {
       margin: 0 0 var(--gap) 0;
@@ -32,6 +32,6 @@ export default function PostNavigation({ slug }: {slug:string}) {
   `
 
   return withMinifiedStyles(css)(
-    <h1 class="nav">go <a href={`/back/${slug}`}>back</a></h1>
+    <h1 class="nav">go <a href={pageNumber === 0 ? '/' : `/page/${pageNumber}`}>back</a></h1>
   )
 }
