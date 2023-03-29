@@ -1,11 +1,12 @@
 name= "blog"
 type = "javascript"
 workers_dev = true
+node_compat = true
 
 compatibility_date = "2022-05-07"
 
 kv_namespaces = [
-	{ binding = "POSTS", id = "d03c966b70f94d8688e55bdf12deb445" }
+	{ binding = "POSTS", id = "d03c966b70f94d8688e55bdf12deb445", preview_id = "4bfaa1b9b58842668a09989e62016ec6" }
 ]
 
 [build]

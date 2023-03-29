@@ -60,8 +60,8 @@ app.get('/:slug', async (c) => {
   return c.html(html)
 })
 
-app.get(`/${USERNAME}/:slug`, async (c) => {
-  const slug = cleanSlug(c.req.param('slug'))
+app.get(`/${USERNAME}/:path`, async (c) => {
+  const slug = cleanSlug(c.req.param('path'))
   return c.redirect(slug, 301)
 })
 

@@ -30,8 +30,8 @@ export function cleanSlug(slug: string): string {
   return slug.substring(0, slug.length - indexOfLastDash)
 }
 
-export async function cacheIndex(password: string, username: string) {
-  if (password === process.env.PASSWORD) {
+export async function cacheIndex(password?: string, username?: string) {
+  if (password === process.env.PASSWORD && username) {
     const posts = await getPosts(username)
     const cachedPosts = await getCachedPosts()
     const isCached = (postId: number) => cachedPosts?.find(cachedPost => (
@@ -59,8 +59,8 @@ export async function cachePost(id: number) {
   return slug
 }
 
-export async function refreshPost(password: string, id: number) {
-  if (password === process.env.PASSWORD) {
+export async function refreshPost(password?: string, id?: number) {
+  if (password === process.env.PASSWORD && id) {
     const slug = await cachePost(id)
     return new Response(`Updated ${slug}`)
   } else {
