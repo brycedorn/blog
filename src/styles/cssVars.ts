@@ -24,7 +24,6 @@ export default `
         --button-base: #111;
         --button-hover: #000;
         --selection: var(--button-base);
-        --scrollbar-thumb: var(--button-hover);
         --form-placeholder: #a9a9a9;
         --form-text: var(--text-bright);
         --color-body-color: var(--background);

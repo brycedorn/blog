@@ -33,27 +33,6 @@ const globalStyles = `
   ::selection {
     background: var(--links);
   }
-
-  ::-webkit-scrollbar {
-    width: 1em;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--background-body);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--focus);
-    border-radius: 0;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--focus);
-  }
-
-  ::-webkit-scrollbar-track-piece {
-    background: var(--background-body);
-  }
 }
 `
 

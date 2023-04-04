@@ -3,7 +3,6 @@ import type { PostDetailType } from '../types'
 import Footer from '../components/Footer'
 import PostDetail from '../components/PostDetail'
 import withGlobalStyles from '../styles/globalStyles'
-import GithubCorner from '../components/GithubCorner'
 import { BLOG_TITLE, BLOG_URL } from '../consts'
 
 export default function Home({ post, slug, pageNumber }: { post: PostDetailType, slug: string, pageNumber: number }) {
@@ -34,7 +33,6 @@ export default function Home({ post, slug, pageNumber }: { post: PostDetailType,
         <PostDetail post={post} slug={slug} pageNumber={pageNumber} />
       </main>
       <Footer />
-      <GithubCorner />
     </>
   )
 }
