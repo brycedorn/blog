@@ -55,8 +55,9 @@ app.get('/:slug', async (c) => {
   const post = await getCachedPost(slug)
   const posts = await getCachedPosts()
   const postIndex = posts.findIndex(({ cachedSlug }: { cachedSlug?: string }) => cachedSlug === slug)
+  const thumbhash = posts[postIndex]?.thumbhash || ''
   const pageNumber = Math.floor(postIndex / PAGE_SIZE)
-  const html = await render(<Post post={post} slug={slug} pageNumber={pageNumber} />, post)
+  const html = await render(<Post post={post} pageNumber={pageNumber} thumbhash={thumbhash} />, post)
   return c.html(html)
 })
 

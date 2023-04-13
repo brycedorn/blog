@@ -2,6 +2,7 @@ import Nano, { Component, Helmet } from 'nano-jsx'
 import { PostDetailType, PostType } from './types'
 import { removeEmoji } from './utils'
 import { BLOG_TITLE, BLOG_URL, PAGE_SIZE } from './consts'
+// import lazysizes from './lazysizes'
 
 export async function render(component: Component, post?: PostDetailType) {
   const app = Nano.renderSSR(component)
@@ -17,6 +18,7 @@ export async function render(component: Component, post?: PostDetailType) {
     <link rel="alternate" type="application/rss+xml" title="RSS Feed for ${BLOG_TITLE}" href="${BLOG_URL}/rss" />
     ${renderStructuredData(post)}
     ${head.join('\n')}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" crossorigin="anonymous"></script>
   </head>
   <body ${attributes.body.toString()}>
     ${body}

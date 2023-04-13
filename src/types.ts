@@ -46,6 +46,7 @@ export interface PostType {
   user: UserType
   flare_tag: string
   cachedSlug?: string
+  thumbhash?: string
 }
 
 export interface PostDetailType {

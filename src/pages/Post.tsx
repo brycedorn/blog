@@ -5,7 +5,7 @@ import PostDetail from '../components/PostDetail'
 import withGlobalStyles from '../styles/globalStyles'
 import { BLOG_TITLE, BLOG_URL } from '../consts'
 
-export default function Home({ post, slug, pageNumber }: { post: PostDetailType, slug: string, pageNumber: number }) {
+export default function Home({ post, pageNumber, thumbhash }: { post: PostDetailType, pageNumber: number, thumbhash: string }) {
   return withGlobalStyles(
     <>
       <Helmet>
@@ -30,7 +30,7 @@ export default function Home({ post, slug, pageNumber }: { post: PostDetailType,
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
       </Helmet>
       <main>
-        <PostDetail post={post} slug={slug} pageNumber={pageNumber} />
+        <PostDetail post={post} pageNumber={pageNumber} thumbhash={thumbhash} />
       </main>
       <Footer />
     </>
