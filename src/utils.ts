@@ -8,7 +8,7 @@ import { decode } from 'jpeg-js'
 import pica from 'pica'
 
 export async function getPosts(username: string): Promise<PostType[]> {
-  const url = `${API_URL}/articles?username=${username}&per_page=1000`
+  const url = `${API_URL}/articles?username=${username}&per_page=1000&state=fresh`
   const response = await fetch(url, fetchOpts)
   return await response.json()
 }
@@ -99,8 +99,7 @@ export async function generateThumbhash(imageUrl: string) {
   const thumbSize = 100
 
   const res = await fetch(imageUrl)
-  const blob = await res.blob()
-  const arrayBuf = await blob.arrayBuffer()
+  const arrayBuf = await res.arrayBuffer()
   const decoded = decode(arrayBuf, { useTArray: true })
   const { width, height, data } = decoded
   const imageWidth = Math.floor((width / height) * thumbSize)
