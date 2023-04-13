@@ -36,7 +36,8 @@ export default function ListPost({ post }: { post: PostType }) {
       width: var(--list-image-size);
       height: var(--list-image-size);
       border-radius: calc(var(--radius) * 2);
-      border: #fff solid 2px;
+      border: var(--text-bright) solid 2px;
+      overflow: hidden;
     }
 
     .post-image img {
@@ -66,12 +67,31 @@ export default function ListPost({ post }: { post: PostType }) {
     p a:hover, .left:hover {
       text-decoration: none;
     }
+
+    .blur-up {
+      filter: blur(5px);
+      transition: filter var(--unblur-duration);
+      position: relative;
+      z-index: 2;
+    }
+
+    .blur-up.lazyloaded {
+      filter: blur(0);
+    }
+
+    .behind {
+      position: absolute;
+      z-index: 1;
+    }
   `
 
   return withMinifiedStyles(css)(
     <li>
       <a class="left" href={postUrl}>
-        {post.cover_image && <div class="post-image"><img src={post.cover_image} /></div>}
+        {post.cover_image && <div class="post-image">
+          <img class="behind" src={post.thumbhash} />
+          <img class="lazyload blur-up" src={post.thumbhash} data-src={post.cover_image}/>
+        </div>}
         <time datetime={post.published_at}>{formattedDate}</time>
       </a>
       <div class="right">

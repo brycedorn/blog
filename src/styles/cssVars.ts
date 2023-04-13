@@ -20,7 +20,8 @@ export default `
         --border-dark: #444;
 
         --code: #ffbe85;
-        --animation-duration: 0.1s;
+        --animation-duration: 100ms;
+        --unblur-duration: 400ms;
         --button-base: #111;
         --button-hover: #000;
         --selection: var(--button-base);
