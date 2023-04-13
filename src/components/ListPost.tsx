@@ -3,7 +3,7 @@ import { withMinifiedStyles } from '../utils'
 import type { PostType } from '../types'
 import { BLOG_URL } from '../consts'
 
-export default function ListPost({ post }: { post: PostType }) {
+export default function ListPost({ post, thumb }: { post: PostType, thumb: string }) {
   const date = new Date(post.published_at)
   const formattedDate = new Intl.DateTimeFormat('en-US').format(date)
   const postUrl = `${BLOG_URL}/${post.cachedSlug || `post/${post.id}`}`
@@ -89,8 +89,8 @@ export default function ListPost({ post }: { post: PostType }) {
     <li>
       <a class="left" href={postUrl}>
         {post.cover_image && <div class="post-image">
-          <img class="behind" src={post.thumbhash} />
-          <img class="lazyload blur-up" src={post.thumbhash} data-src={post.cover_image}/>
+          <img class="behind" src={thumb} />
+          <img class="lazyload blur-up" src={thumb} data-src={post.cover_image}/>
         </div>}
         <time datetime={post.published_at}>{formattedDate}</time>
       </a>

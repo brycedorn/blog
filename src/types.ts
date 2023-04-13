@@ -1,5 +1,6 @@
 declare global {
   const POSTS: KVStorageType
+  const THUMBS: KVStorageType
 }
 
 interface KVStorageType {
@@ -46,7 +47,6 @@ export interface PostType {
   user: UserType
   flare_tag: string
   cachedSlug?: string
-  thumbhash?: string
 }
 
 export interface PostDetailType {

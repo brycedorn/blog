@@ -5,7 +5,7 @@ import ListPost from './ListPost'
 import type { PostType } from '../types'
 import { DEV_TO_URL } from '../consts'
 
-export default function List({ posts }: { posts: PostType[] }) {
+export default function List({ posts, thumbs }: { posts: PostType[], thumbs: string[] }) {
   const avatarUrl = posts && posts[0].user.profile_image_90
 
   const css = `
@@ -71,7 +71,7 @@ export default function List({ posts }: { posts: PostType[] }) {
         {posts?.map((post, i) => (
           <>
             {i > 0 && <hr />}
-            <ListPost post={post} />
+            <ListPost post={post} thumb={thumbs[i]} />
           </>
         ))}
       </ul>

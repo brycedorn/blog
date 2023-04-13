@@ -42,14 +42,17 @@ export async function cacheIndex(password?: string, username?: string) {
       cachedPosts?.find(
         (cachedPost) => cachedPost.id === postId && cachedPost.cachedSlug
       )
-    const thumbhashes = await Promise.all(
-      posts.map((post) => generateThumbhash(post.cover_image))
+
+    await Promise.all(
+      posts.map(async (post) => {
+        const thumbHash = await generateThumbhash(post.cover_image)
+        await THUMBS.put(`${post.id}`, thumbHash)
+      })
     )
 
     const newCachedPosts = posts.map((post, i) => ({
       ...post,
       cachedSlug: isCached(post.id) ? cleanSlug(post.slug) : null,
-      thumbhash: thumbhashes[i],
     }))
     const numCached = newCachedPosts.filter(
       ({ cachedSlug }) => cachedSlug
