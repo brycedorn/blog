@@ -40,7 +40,7 @@ export async function cacheIndex(password?: string, username?: string) {
     const cachedPosts = await getCachedPosts()
     const isCached = (postId: number) =>
       cachedPosts?.find(
-        (cachedPost) => cachedPost.id === postId && cachedPost.cachedSlug
+        (cachedPost) => cachedPost.id === postId && cachedPost.cached_slug
       )
 
     await Promise.all(
@@ -50,12 +50,12 @@ export async function cacheIndex(password?: string, username?: string) {
       })
     )
 
-    const newCachedPosts = posts.map((post, i) => ({
+    const newCachedPosts = posts.map(post => ({
       ...post,
-      cachedSlug: isCached(post.id) ? cleanSlug(post.slug) : null,
+      cached_slug: isCached(post.id) ? cleanSlug(post.slug) : null
     }))
     const numCached = newCachedPosts.filter(
-      ({ cachedSlug }) => cachedSlug
+      ({ cached_slug }) => cached_slug
     ).length
     await POSTS.put('INDEX', JSON.stringify(newCachedPosts))
     return new Response(
@@ -72,7 +72,7 @@ export async function cachePost(id: number) {
   await POSTS.put(`${slug}`, JSON.stringify({ ...post, slug }))
   const posts = await getCachedPosts()
   const cachedPostIndex = posts.map((p) => p.id).indexOf(id)
-  posts[cachedPostIndex].cachedSlug = slug
+  posts[cachedPostIndex].cached_slug = slug
   await POSTS.put('INDEX', JSON.stringify(posts))
   return slug
 }
@@ -92,6 +92,11 @@ export function withMinifiedStyles(css: string) {
 
 export function removeEmoji(s: string) {
   return s.replace(/[^\p{L}\p{N}\p{P}\p{Z}^$\n]/gu, '')
+}
+
+export function generateThumbURL(url: string, height: number) {
+  const regex = /(h_{1}\d{1,3},q_{1}auto,w_{1}\d{1,4})/g
+  return url.replace('c_imagga_scale,','').replace(regex,`h_${height}`)
 }
 
 export async function generateThumbhash(imageUrl: string) {

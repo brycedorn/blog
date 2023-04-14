@@ -46,7 +46,7 @@ export interface PostType {
   tags: string
   user: UserType
   flare_tag: string
-  cachedSlug?: string
+  cached_slug?: string
 }
 
 export interface PostDetailType {

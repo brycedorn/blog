@@ -32,6 +32,6 @@ export default function PostNavigation({ pageNumber }: {pageNumber:number}) {
   `
 
   return withMinifiedStyles(css)(
-    <h1 class="nav">go <a href={pageNumber === 0 ? '/' : `/page/${pageNumber}`}>back</a></h1>
+    <h1 class="nav">go <a href={pageNumber === 0 ? '/' : `/page/${pageNumber}`} aria-label="Back to post list">back</a></h1>
   )
 }

@@ -6,7 +6,7 @@ import type { PostType } from '../types'
 import { DEV_TO_URL } from '../consts'
 
 export default function List({ posts, thumbs }: { posts: PostType[], thumbs: string[] }) {
-  const avatarUrl = posts && posts[0].user.profile_image_90
+  const user = posts && posts[0].user
 
   const css = `
     h1 {
@@ -59,21 +59,28 @@ export default function List({ posts, thumbs }: { posts: PostType[], thumbs: str
       display: flex;
       align-items: center;
     }
+
+    p {
+      text-align: center;
+      margin: 10em 0;
+    }
   `
 
   return withMinifiedStyles(css)(
     <>
       <div id="title">
-        {avatarUrl && <a id="me" href="/"><img src={avatarUrl}/></a>}
+        {user && <a id="me" aria-label="Link to homepage" href="/"><img src={user?.profile_image_90} width={40} height={40} alt={`Profile image for ${user?.username}`} /></a>}
         <h1>my posts on <a href={DEV_TO_URL}>dev.to</a></h1>
       </div>
       <ul>
-        {posts?.map((post, i) => (
+        {posts ? posts.map((post, i) => (
           <>
             {i > 0 && <hr />}
             <ListPost post={post} thumb={thumbs[i]} />
           </>
-        ))}
+        )) : (
+          <p>There's nothing here. Maybe try <a aria-label="Link to update route" href="/update">updating</a> the cache?</p>
+        )}
       </ul>
     </>
   )

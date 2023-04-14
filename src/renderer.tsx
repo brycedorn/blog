@@ -2,7 +2,6 @@ import Nano, { Component, Helmet } from 'nano-jsx'
 import { PostDetailType, PostType } from './types'
 import { removeEmoji } from './utils'
 import { BLOG_TITLE, BLOG_URL, PAGE_SIZE } from './consts'
-// import lazysizes from './lazysizes'
 
 export async function render(component: Component, post?: PostDetailType) {
   const app = Nano.renderSSR(component)
@@ -10,7 +9,7 @@ export async function render(component: Component, post?: PostDetailType) {
   const favicon = await POSTS.get('favicon')
 
   const html = `<!DOCTYPE html>
-<html ${attributes.html.toString()}>
+<html ${attributes.html.toString()} lang="en">
   <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
@@ -38,7 +37,7 @@ export async function renderFeed(posts: PostType[]) {
     <description>Idk</description>${posts?.map(post => `
     <item>
       <title>${removeEmoji(post.title)}</title>
-      <link>${BLOG_URL}/${post.cachedSlug}</link>
+      <link>${BLOG_URL}/${post.cached_slug}</link>
       <description>${removeEmoji(post.description)}</description>
       <guid>${post.slug}</guid>
       <pubDate>${(new Date(post.published_at)).toUTCString()}</pubDate>
@@ -64,7 +63,7 @@ export async function renderSitemap(posts: PostType[]) {
   <priority>1.00</priority>
 </url>
 ${posts?.map((post, i) => `<url>
-  <loc>${BLOG_URL}/${post.cachedSlug}</loc>
+  <loc>${BLOG_URL}/${post.cached_slug}</loc>
   <lastmod>${lastmod}</lastmod>
   <priority>${Number(0.99 - i/posts.length).toFixed(2)}</priority>
 </url>

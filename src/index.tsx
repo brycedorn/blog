@@ -15,7 +15,7 @@ app.get('/', async (c) => {
   const posts = await getCachedPosts()
   const page = posts?.slice(0, PAGE_SIZE)
   const defaultPageInfo = { pageNumber: 0, isFirstPage: true, isLastPage: posts?.length <= PAGE_SIZE }
-  const thumbs = await Promise.all(page.map(post => THUMBS.get(`${post.id}`)))
+  const thumbs = await Promise.all((page || []).map(post => THUMBS.get(`${post.id}`)))
   const html = await render(<Home posts={page} pageInfo={defaultPageInfo} thumbs={thumbs} />)
   return c.html(html)
 })
@@ -56,7 +56,7 @@ app.get('/:slug', async (c) => {
   const slug = c.req.param('slug')
   const post = await getCachedPost(slug)
   const posts = await getCachedPosts()
-  const postIndex = posts.findIndex(({ cachedSlug }: { cachedSlug?: string }) => cachedSlug === slug)
+  const postIndex = posts.findIndex(({ cached_slug }: { cached_slug?: string }) => cached_slug === slug)
   const thumbhash = await THUMBS.get(`${post.id}`)
   const pageNumber = Math.floor(postIndex / PAGE_SIZE)
   const html = await render(<Post post={post} pageNumber={pageNumber} thumbhash={thumbhash} />, post)

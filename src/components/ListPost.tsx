@@ -1,12 +1,12 @@
 import Nano from 'nano-jsx'
-import { withMinifiedStyles } from '../utils'
+import { generateThumbURL, withMinifiedStyles } from '../utils'
 import type { PostType } from '../types'
 import { BLOG_URL } from '../consts'
 
 export default function ListPost({ post, thumb }: { post: PostType, thumb: string }) {
   const date = new Date(post.published_at)
   const formattedDate = new Intl.DateTimeFormat('en-US').format(date)
-  const postUrl = `${BLOG_URL}/${post.cachedSlug || `post/${post.id}`}`
+  const postUrl = `${BLOG_URL}/${post.cached_slug || `post/${post.id}`}`
 
   const css = `
     li {
@@ -87,19 +87,19 @@ export default function ListPost({ post, thumb }: { post: PostType, thumb: strin
 
   return withMinifiedStyles(css)(
     <li>
-      <a class="left" href={postUrl}>
+      <a class="left" href={postUrl} aria-label="Link to read article">
         {post.cover_image && <div class="post-image">
-          <img class="behind" src={thumb} />
-          <img class="lazyload blur-up" src={thumb} data-src={post.cover_image}/>
+          <img class="behind" src={thumb} width={80} height={80} alt="Placeholder image for post thumbnail" />
+          <img class="lazyload blur-up" src={thumb} data-src={generateThumbURL(post.cover_image, 160)} width={80} height={80} alt="Post thumbnail" />
         </div>}
         <time datetime={post.published_at}>{formattedDate}</time>
       </a>
       <div class="right">
         <h2>
-          <a href={postUrl}>{post.title}</a>
+          <a href={postUrl} aria-label="Link to read article">{post.title}</a>
         </h2>
         <p><i>
-          <a href={postUrl}>{post.description}</a>
+          <a href={postUrl} aria-label="Link to read article">{post.description}</a>
         </i></p>
       </div>
     </li>

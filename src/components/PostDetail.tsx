@@ -32,6 +32,7 @@ export default function PostDetail({ post, pageNumber, thumbhash }: { post: Post
 
     #cover {
       margin-top: calc(var(--gap)*2);
+      display: flex;
     }
 
     #cover img {
@@ -45,9 +46,6 @@ export default function PostDetail({ post, pageNumber, thumbhash }: { post: Post
     .blur-up {
       filter: blur(5px);
       transition: filter var(--unblur-duration);
-      position: absolute;
-      left: 0;
-      z-index: 2;
     }
 
     .blur-up.lazyloaded {
@@ -61,6 +59,14 @@ export default function PostDetail({ post, pageNumber, thumbhash }: { post: Post
       overflow: hidden;
     }
 
+    .blur-container {
+      position: absolute;
+      left: 0;
+      z-index: 2;
+      overflow: hidden;
+      margin: 0 calc(var(--gap)/4) calc(var(--gap)/4) calc(var(--gap)/4);
+    }
+
     ${codeStyles}
     ${embedStyles}
   `
@@ -68,11 +74,13 @@ export default function PostDetail({ post, pageNumber, thumbhash }: { post: Post
   return withMinifiedStyles(css)(
     <>
       <PostNavigation pageNumber={pageNumber} />
-      {post.cover_image && <a href={post.url} id="cover">
-        <img class="behind" src={thumbhash} />
-        <img class="lazyload blur-up" data-src={post.cover_image} />
+      {post.cover_image && <a href={post.url} id="cover" aria-label="Read article on dev.to">
+        <img class="behind" src={thumbhash} width={788} height={331} alt="Placeholder for post cover image" />
+        <div class="blur-container">
+          <img class="lazyload blur-up" data-src={post.cover_image} width={788} height={331} alt="Cover image for post" />
+        </div>
       </a>}
-      <h1><a href={post.url}>{post.title}</a></h1>
+      <h1><a href={post.url} aria-label="Read article on dev.to">{post.title}</a></h1>
       <h3>{formattedDate}</h3>
       <div id="content" innerHTML={{ __dangerousHtml: post.body_html }} />
       <PostNavigation pageNumber={pageNumber} />

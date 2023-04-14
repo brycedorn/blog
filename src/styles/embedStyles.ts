@@ -47,8 +47,8 @@ export default `
     }
 
     .ltag__link .ltag__link__pic img {
-        width: calc(2.2vw + 45px);
-        height: calc(2.2vw + 45px);
+        max-width: calc(2.2vw + 45px);
+        max-height: calc(2.2vw + 45px);
         border-radius: 150px;
         margin-right: calc(var(--gap) /2);
     }
