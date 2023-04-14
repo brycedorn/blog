@@ -60,7 +60,7 @@ export default function List({ posts, thumbs }: { posts: PostType[], thumbs: str
       align-items: center;
     }
 
-    p {
+    .empty {
       text-align: center;
       margin: 10em 0;
     }
@@ -79,7 +79,7 @@ export default function List({ posts, thumbs }: { posts: PostType[], thumbs: str
             <ListPost post={post} thumb={thumbs[i]} />
           </>
         )) : (
-          <p>There's nothing here. Maybe try <a aria-label="Link to update route" href="/update">updating</a> the cache?</p>
+          <p class="empty">There's nothing here. Maybe try <a aria-label="Link to update route" href="/update">updating</a> the cache?</p>
         )}
       </ul>
     </>
