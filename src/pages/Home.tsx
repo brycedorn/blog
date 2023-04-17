@@ -4,7 +4,7 @@ import Footer from '../components/Footer'
 import List from '../components/List'
 import withGlobalStyles from '../styles/globalStyles'
 import ListPagination from '../components/ListPagination'
-import { BLOG_URL } from '../consts'
+import { BLOG_TITLE, BLOG_URL, DESCRIPTION } from '../consts'
 
 export default function Home({ posts, pageInfo, thumbs }: { posts: PostType[], pageInfo: PageInfoType, thumbs: string[] }) {
   const post = posts?.[0]
@@ -14,16 +14,15 @@ export default function Home({ posts, pageInfo, thumbs }: { posts: PostType[], p
       <Helmet>
         <title>bryce.io | blog</title>
         <meta name="last-updated" content={post?.edited_at} />
-        <meta name="description" content="This is my developer blog and sandbox for playing with edge workers. I mostly write about web & JS, sometimes Rust." />
+        <meta name="description" content={DESCRIPTION} />
         <meta name="keywords" content="" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={BLOG_URL} />
-        <meta property="og:title" content="blog.bryce.io" />
-        <meta property="og:description" content="This is my developer blog and sandbox for playing with edge workers. I mostly write about web & JS, sometimes Rust." />
-        <meta property="og:site_name" content="blog.bryce.io" />
-        <meta name="twitter:creator" content="@amsterdorn" />
-        <meta name="twitter:title" content="blog.bryce.io"/>
-        <meta name="twitter:description" content="This is my developer blog and sandbox for playing with edge workers. I mostly write about web & JS, sometimes Rust." />
+        <meta property="og:title" content={BLOG_TITLE} />
+        <meta property="og:description" content={DESCRIPTION} />
+        <meta property="og:site_name" content={BLOG_TITLE} />
+        <meta name="twitter:title" content={BLOG_TITLE}/>
+        <meta name="twitter:description" content={DESCRIPTION} />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:widgets:new-embed-design" content="on" />
         <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />

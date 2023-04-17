@@ -1,7 +1,7 @@
 import Nano, { Component, Helmet } from 'nano-jsx'
 import { PostDetailType, PostType } from './types'
 import { removeEmoji } from './utils'
-import { BLOG_TITLE, BLOG_URL, PAGE_SIZE } from './consts'
+import { BLOG_TITLE, BLOG_URL, DESCRIPTION, PAGE_SIZE } from './consts'
 
 export async function render(component: Component, post?: PostDetailType) {
   const app = Nano.renderSSR(component)
@@ -30,16 +30,17 @@ export async function render(component: Component, post?: PostDetailType) {
 
 export async function renderFeed(posts: PostType[]) {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" rel="self">
   <channel>
-    <title>bryce.io | blog RSS</title>
+    <title>${BLOG_TITLE} | RSS</title>
     <link>${BLOG_URL}</link>
-    <description>Idk</description>${posts?.map(post => `
+    <atom:link href="${BLOG_URL}/rss" rel="self" type="application/rss+xml" />
+    <description>${DESCRIPTION}</description>${posts?.map(post => `
     <item>
       <title>${removeEmoji(post.title)}</title>
       <link>${BLOG_URL}/${post.cached_slug}</link>
-      <description>${removeEmoji(post.description)}</description>
-      <guid>${post.slug}</guid>
+      <description>${removeEmoji(post.description)}<![CDATA[<img src=${post.cover_image} alt="Cover image for ${post.cached_slug}">]></description>
+      <guid isPermaLink="false">${post.id}</guid>
       <pubDate>${(new Date(post.published_at)).toUTCString()}</pubDate>
     </item>`).join('')}
   </channel>

@@ -1,11 +1,17 @@
 import { withStyles } from 'nano-jsx'
 import { minify } from 'csso'
 import type { PostType, PostDetailType } from './types'
-import { API_URL, fetchOpts } from './consts'
+import { API_URL } from './consts'
 import { thumbHashToDataURL, rgbaToThumbHash } from 'thumbhash'
 import { decode } from 'jpeg-js'
 // @ts-expect-error esModuleInterop
 import pica from 'pica'
+
+const fetchOpts = {
+  headers: {
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36'
+  }
+}
 
 export async function getPosts(username: string): Promise<PostType[]> {
   const url = `${API_URL}/articles?username=${username}&per_page=1000&state=fresh`
