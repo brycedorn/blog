@@ -39,7 +39,7 @@ export async function renderFeed(posts: PostType[]) {
     <item>
       <title>${removeEmoji(post.title)}</title>
       <link>${BLOG_URL}/${post.cached_slug}</link>
-      <description>${removeEmoji(post.description)}<![CDATA[<img src=${post.cover_image} alt="Cover image for post ${post.id}">]]></description>
+      <description>${removeEmoji(post.description)}${post.cover_image ? `<![CDATA[<img src=${post.cover_image} alt="Cover image for post ${post.id}">]]>` : ''}</description>
       <guid isPermaLink="false">${post.slug}</guid>
       <pubDate>${(new Date(post.published_at)).toUTCString()}</pubDate>
     </item>`).join('')}
