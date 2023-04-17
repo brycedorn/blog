@@ -11,7 +11,6 @@ const OUTPUT_FILE = 'index.js'
 build({
   entryPoints: [`${APP_BASE}/${ENTRY_FILE}`],
   define: {
-    'process.env.COOKIE': JSON.stringify(process.env.COOKIE),
     'process.env.PASSWORD': JSON.stringify(process.env.PASSWORD),
   },
   bundle: true,
