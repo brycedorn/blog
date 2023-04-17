@@ -30,7 +30,7 @@ export async function render(component: Component, post?: PostDetailType) {
 
 export async function renderFeed(posts: PostType[]) {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" rel="self">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${BLOG_TITLE} | RSS</title>
     <link>${BLOG_URL}</link>
