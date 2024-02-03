@@ -107,6 +107,25 @@ export function removeEmoji(s: string) {
   return s.replace(/[^\p{L}\p{N}\p{P}\p{Z}^$\n]/gu, '')
 }
 
+export function escapeXML(s: string) {
+  return s.replace(/[<>&"']/g, function (c) {
+    switch (c) {
+    case '<':
+      return '&lt;'
+    case '>':
+      return '&gt;'
+    case '&':
+      return '&amp;'
+    case '"':
+      return '&quot;'
+    case '\'':
+      return '&apos;'
+    default:
+      return c
+    }
+  })
+}
+
 export function generateThumbURL(url: string, height: number) {
   const regex = /(h_{1}\d{1,3},q_{1}auto,w_{1}\d{1,4})/g
   return url.replace('c_imagga_scale,','').replace(regex,`h_${height}`)

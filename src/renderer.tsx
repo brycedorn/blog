@@ -1,6 +1,6 @@
 import Nano, { Component, Helmet } from 'nano-jsx'
 import { PostDetailType, PostType } from './types'
-import { removeEmoji } from './utils'
+import { escapeXML, removeEmoji } from './utils'
 import { BLOG_TITLE, BLOG_URL, DESCRIPTION, PAGE_SIZE } from './consts'
 
 export async function render(component: Component, post?: PostDetailType) {
@@ -37,7 +37,7 @@ export async function renderFeed(posts: PostType[]) {
     <atom:link href="${BLOG_URL}/rss" rel="self" type="application/rss+xml" />
     <description>${DESCRIPTION}</description>${posts?.map(post => `
     <item>
-      <title>${removeEmoji(post.title)}</title>
+      <title>${escapeXML(removeEmoji(post.title))}</title>
       <link>${BLOG_URL}/${post.cached_slug}</link>
       <description>${removeEmoji(post.description)}${post.cover_image ? `<![CDATA[<img src=${post.cover_image} alt="Cover image for post ${post.id}">]]>` : ''}</description>
       <guid isPermaLink="false">${post.slug}</guid>
@@ -85,25 +85,6 @@ export function renderRobotsTxt() {
   return `User-agent: *\nSitemap: ${BLOG_URL}/sitemap.xml`
 }
 
-function escapeXML(s: string) {
-  return s.replace(/[<>&"']/g, function (c) {
-    switch (c) {
-    case '<':
-      return '&lt;'
-    case '>':
-      return '&gt;'
-    case '&':
-      return '&amp;'
-    case '"':
-      return '&quot;'
-    case '\'':
-      return '&apos;'
-    default:
-      return c
-    }
-  })
-}
-
 function renderStructuredData(post?: PostDetailType) {
   if (!post) {
     return ''
@@ -112,7 +93,7 @@ function renderStructuredData(post?: PostDetailType) {
   const json = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: escapeXML(post.title),
+    headline: post.title,
     image: [post.cover_image],
     datePublished: post.published_at,
     dateModified: post.edited_at || post.created_at,
