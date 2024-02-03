@@ -76,10 +76,14 @@ export async function cachePost(id: number) {
   const post = await getPost(id)
   const slug = cleanSlug(post.slug)
   await POSTS.put(`${slug}`, JSON.stringify({ ...post, slug }))
+  const thumbHash = await generateThumbhash(post.cover_image)
+  await THUMBS.put(`${post.id}`, thumbHash)
   const posts = await getCachedPosts()
   const cachedPostIndex = posts.map((p) => p.id).indexOf(id)
-  posts[cachedPostIndex].cached_slug = slug
-  await POSTS.put('INDEX', JSON.stringify(posts))
+  if (cachedPostIndex === -1) {
+    const newPosts = [{ ...post, cached_slug: slug }, ...posts]
+    await POSTS.put('INDEX', JSON.stringify(newPosts))
+  }
   return slug
 }
 
