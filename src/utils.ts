@@ -83,6 +83,9 @@ export async function cachePost(id: number) {
   if (cachedPostIndex === -1) {
     const newPosts = [{ ...post, cached_slug: slug }, ...posts]
     await POSTS.put('INDEX', JSON.stringify(newPosts))
+  } else {
+    posts[cachedPostIndex] = { ...post, cached_slug: slug, tags: post.tags[0] } as PostType
+    await POSTS.put('INDEX', JSON.stringify(posts))
   }
   return slug
 }
