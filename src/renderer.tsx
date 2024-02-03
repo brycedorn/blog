@@ -85,6 +85,25 @@ export function renderRobotsTxt() {
   return `User-agent: *\nSitemap: ${BLOG_URL}/sitemap.xml`
 }
 
+function escapeXML(s: string) {
+  return s.replace(/[<>&"']/g, function (c) {
+    switch (c) {
+    case '<':
+      return '&lt;'
+    case '>':
+      return '&gt;'
+    case '&':
+      return '&amp;'
+    case '"':
+      return '&quot;'
+    case '\'':
+      return '&apos;'
+    default:
+      return c
+    }
+  })
+}
+
 function renderStructuredData(post?: PostDetailType) {
   if (!post) {
     return ''
@@ -93,7 +112,7 @@ function renderStructuredData(post?: PostDetailType) {
   const json = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: post.title,
+    headline: escapeXML(post.title),
     image: [post.cover_image],
     datePublished: post.published_at,
     dateModified: post.edited_at || post.created_at,
